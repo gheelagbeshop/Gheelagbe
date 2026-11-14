@@ -1,45 +1,37 @@
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 @import "tailwindcss";
 
 /* ================================
-   GheeLagbe - Design System
+   GheeLagbe Design System
 ================================ */
 
 :root {
-  /* Brand Colors */
   --color-primary: #254D32;
   --color-primary-dark: #193B26;
   --color-primary-light: #E8F0E8;
 
-  /* Accent Colors */
   --color-accent: #D9A441;
   --color-accent-light: #F5E7C5;
 
-  /* Background Colors */
   --color-background: #FFF9EE;
   --color-surface: #FFFFFF;
   --color-surface-alt: #F7F3E9;
 
-  /* Text Colors */
   --color-text: #242820;
   --color-text-secondary: #6F746B;
   --color-text-muted: #9A9E94;
 
-  /* Border Colors */
   --color-border: #E8E4D9;
 
-  /* Status Colors */
   --color-success: #2F855A;
   --color-error: #DC2626;
   --color-warning: #D97706;
 
-  /* Typography */
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --font-heading: 'DM Serif Display', serif;
 
-  /* Layout */
   --container-width: 1280px;
 }
 
@@ -47,59 +39,62 @@
    Base Styles
 ================================ */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  html {
+    scroll-behavior: smooth;
+  }
 
-body {
-  font-family: var(--font-body);
-  background-color: var(--color-background);
-  color: var(--color-text);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  font-weight: 400;
-  line-height: 1.2;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    line-height: 1.2;
+  }
 
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
 
-button {
-  cursor: pointer;
-}
+  button {
+    cursor: pointer;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-img {
-  display: block;
-  max-width: 100%;
-}
+  img {
+    display: block;
+    max-width: 100%;
+  }
 
-::selection {
-  background-color: var(--color-accent-light);
-  color: var(--color-primary-dark);
+  ::selection {
+    background-color: var(--color-accent-light);
+    color: var(--color-primary-dark);
+  }
 }
 
 /* ================================
