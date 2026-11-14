@@ -1,5 +1,5 @@
 
-import Navbar from "./NavBar";
+
 
 const Header = () => {
   return (
@@ -25,7 +25,6 @@ const Header = () => {
       </div>
 
       {/* Main Navigation */}
-      <Navbar />
     </header>
   );
 };
