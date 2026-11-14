@@ -1,12 +1,12 @@
 import React from 'react'
-import NavBar from './NavBar'
 import { Outlet } from 'react-router'
-import Footer from './Footer'
+import Footer from './layout/Footer'
+import Header from './layout/Header'
 
 const Root = () => {
   return (
     <main>
-        <NavBar />
+        <Header />
         <Outlet />
         <Footer />
     </main>
