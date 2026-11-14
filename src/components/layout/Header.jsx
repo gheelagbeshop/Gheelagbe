@@ -1,4 +1,4 @@
-
+import NavBar from "./NavBar";
 
 
 const Header = () => {
@@ -25,6 +25,7 @@ const Header = () => {
       </div>
 
       {/* Main Navigation */}
+      <NavBar />
     </header>
   );
 };
