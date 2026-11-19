@@ -1,6 +1,5 @@
 import img1 from "../assets/hero-spices.webp";
 import img2 from "../assets/img4.jpg";
-import img3 from "../assets/mortar-illustration.webp";
 // const values = [
 //   {
 //     title: "100% Natural",
