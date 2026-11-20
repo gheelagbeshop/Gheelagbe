@@ -1,0 +1,73 @@
+
+const CART_KEY = "gheelagbe-cart";
+
+export const getCart = () => {
+  try {
+    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+  } catch {
+    return [];
+  }
+};
+
+export const addToCart = (product, quantity = 1) => {
+  const cart = getCart();
+  const existingItem = cart.find((item) => item.id === product.id);
+
+  let updatedCart;
+
+  if (existingItem) {
+    updatedCart = cart.map((item) =>
+      item.id === product.id
+        ? { ...item, quantity: item.quantity + quantity }
+        : item
+    );
+  } else {
+    updatedCart = [
+      ...cart,
+      {
+        id: product.id,
+        slug: product.slug,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        weight: product.weight,
+        quantity,
+      },
+    ];
+  }
+
+  localStorage.setItem(CART_KEY, JSON.stringify(updatedCart));
+  window.dispatchEvent(new Event("gheelagbe-cart-updated"));
+
+  return updatedCart;
+};
+
+export const getCartCount = () =>
+  getCart().reduce((total, item) => total + item.quantity, 0);
+
+export const removeFromCart = (productId) => {
+  const updatedCart = getCart().filter((item) => item.id !== productId);
+
+  localStorage.setItem(CART_KEY, JSON.stringify(updatedCart));
+  window.dispatchEvent(new Event("gheelagbe-cart-updated"));
+
+  return updatedCart;
+};
+
+export const updateCartQuantity = (productId, quantity) => {
+  if (quantity < 1) return removeFromCart(productId);
+
+  const updatedCart = getCart().map((item) =>
+    item.id === productId ? { ...item, quantity } : item
+  );
+
+  localStorage.setItem(CART_KEY, JSON.stringify(updatedCart));
+  window.dispatchEvent(new Event("gheelagbe-cart-updated"));
+
+  return updatedCart;
+};
+
+export const clearCart = () => {
+  localStorage.removeItem(CART_KEY);
+  window.dispatchEvent(new Event("gheelagbe-cart-updated"));
+};
