@@ -55,7 +55,7 @@ const CartPage = () => {
     0
   );
 
-  const deliveryCharge = subtotal > 0 ? 80 : 0;
+  const deliveryCharge = subtotal > 0 ? 120 : 0;
   const total = subtotal + deliveryCharge;
 
   const handleQuantityChange = (id, quantity) => {

@@ -1,7 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Root from "./components/Root";
 import HomePage from "./Pages/HomePage";
@@ -11,6 +8,8 @@ import ContactUs from "./Pages/ContactUs";
 import ProductDetails from "./Pages/ProductDetails";
 import CartPage from "./Pages/CartPage";
 import NotFoundPage from "./Pages/NotFoundPage";
+import CheckoutPage from "./Pages/CheckoutPage";
+import OrderSuccessPage from "./Pages/OrderSuccessPage";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +21,8 @@ const router = createBrowserRouter([
       { path: "products", element: <ProductsPage /> },
       { path: "product/:slug", element: <ProductDetails /> },
       { path: "cart", element: <CartPage /> },
+      { path: "checkout", element: <CheckoutPage /> },
+      { path: "order-success", element: <OrderSuccessPage /> },
       { path: "contact", element: <ContactUs /> },
       { path: "*", element: <NotFoundPage /> },
     ],
