@@ -225,7 +225,7 @@ const Hero = () => {
             </div>
 
             {/* Floating Brand Badge */}
-            <div className="absolute -bottom-5 left-4 rounded-2xl border border-[#E8E4D9] bg-white px-4 py-3 shadow-xl sm:-bottom-6 sm:left-8">
+            {/* <div className="absolute -bottom-5 left-4 rounded-2xl border border-[#E8E4D9] bg-white px-4 py-3 shadow-xl sm:-bottom-6 sm:left-8">
               <p className="font-heading text-2xl leading-none text-[#254D32]">
                 GheeLagbe.
               </p>
@@ -233,7 +233,7 @@ const Hero = () => {
               <p className="mt-1.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#8B9186]">
                 {t("hero.brandTagline")}
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
 
