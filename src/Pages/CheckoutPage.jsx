@@ -15,6 +15,7 @@ import {
 import { getCart, clearCart } from "../utils/cart";
 import { getProductName } from "../data/products";
 import { useLanguage } from "../context/LanguageContext";
+import SEO from "../components/SEO";
 
 const DELIVERY_CHARGE = 120;
 
@@ -246,6 +247,11 @@ const CheckoutPage = () => {
 
   return (
     <div className="min-h-screen bg-[#FFF9EE] pb-20">
+      <SEO
+        title="অর্ডার সম্পন্ন করুন | GheeLagbe"
+        description="আপনার অর্ডারের তথ্য প্রদান করুন।"
+        noindex
+      />
       <section className="border-b border-[#E8E4D9] bg-white">
         <div className="mx-auto max-w-7xl px-4 py-9 sm:px-6 lg:px-8">
           <div className="mb-3 flex items-center gap-2 text-sm text-[#6F746B]">

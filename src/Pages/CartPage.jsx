@@ -20,6 +20,7 @@ import {
 } from "../utils/cart";
 import { getProductName } from "../data/products";
 import { useLanguage } from "../context/LanguageContext";
+import SEO from "../components/SEO";
 
 const formatPrice = (price) =>
   `৳${Number(price || 0).toLocaleString("en-BD")}`;
@@ -78,6 +79,11 @@ const CartPage = () => {
 
   return (
     <div className="min-h-screen bg-[#FFF9EE] pb-20">
+      <SEO
+        title="আপনার শপিং কার্ট | GheeLagbe"
+        description="আপনার নির্বাচিত পণ্যগুলো দেখুন।"
+        noindex
+      />
       {/* Hero */}
       <section className="border-b border-[#E8E4D9] bg-white">
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">

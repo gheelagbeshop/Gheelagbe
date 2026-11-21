@@ -11,6 +11,7 @@ import {
   Truck,
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import SEO from "../components/SEO";
 
 const photos = {
   hero: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1800&q=90",
@@ -134,6 +135,11 @@ const AboutUsPage = () => {
 
   return (
     <main className="overflow-hidden bg-[#fbf8f0] text-[#20291f]">
+      <SEO
+        title="আমাদের সম্পর্কে | GheeLagbe"
+        description="GheeLagbe সম্পর্কে জানুন। আমরা খাঁটি ও প্রাকৃতিক খাদ্যসামগ্রী পৌঁছে দিতে কাজ করি।"
+        canonical="https://gheelagbe.com/about"
+      />
       {/* HERO */}
       <section className="relative isolate min-h-[660px] overflow-hidden bg-[#e9eee5] lg:min-h-[720px]">
         <div className="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(ellipse_at_12%_20%,rgba(255,255,255,.95),transparent_38%),radial-gradient(ellipse_at_85%_85%,rgba(114,139,102,.18),transparent_38%)]" />
