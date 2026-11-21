@@ -1,4 +1,3 @@
-
 import { Link, Navigate } from "react-router-dom";
 import {
   CheckCircle2,
@@ -7,11 +6,14 @@ import {
   ShoppingBag,
   Truck,
 } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
+import { getProductName } from "../data/products";
 
 const formatPrice = (price) =>
   `৳${Number(price || 0).toLocaleString("en-BD")}`;
 
 const OrderSuccessPage = () => {
+  const { t, language } = useLanguage();
   let order = null;
 
   try {
@@ -26,6 +28,16 @@ const OrderSuccessPage = () => {
     return <Navigate to="/products" replace />;
   }
 
+  const paymentMethodLabel =
+    order.paymentMethod === "Cash on Delivery"
+      ? language === "bn"
+        ? "ক্যাশ অন ডেলিভারি"
+        : "Cash on Delivery"
+      : order.paymentMethod;
+
+  const statusLabel =
+    order.status === "Pending" ? t("orderSuccess.pendingStatus") : order.status;
+
   return (
     <div className="min-h-screen bg-[#FFF9EE] px-4 py-12">
       <div className="mx-auto max-w-2xl">
@@ -35,33 +47,32 @@ const OrderSuccessPage = () => {
           </div>
 
           <p className="mt-6 text-sm font-bold uppercase tracking-[0.2em] text-[#D9A441]">
-            Order placed successfully
+            {t("orderSuccess.statusBadge")}
           </p>
 
           <h1 className="mt-3 text-4xl font-bold text-[#193B26] sm:text-5xl">
-            Thank You!
+            {t("orderSuccess.title")}
           </h1>
 
           <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-[#6F746B]">
-            Your order has been received. Our team will call you shortly
-            to confirm your order and delivery details.
+            {t("orderSuccess.description")}
           </p>
 
           <div className="mt-8 rounded-2xl bg-[#F7F3E9] p-5">
             <p className="text-xs font-semibold uppercase tracking-wider text-[#6F746B]">
-              Your Order Reference
+              {t("orderSuccess.orderRef")}
             </p>
             <p className="mt-2 text-2xl font-bold tracking-wider text-[#254D32]">
               {order.orderId}
             </p>
             <span className="mt-3 inline-flex rounded-full bg-[#F5E7C5] px-4 py-1.5 text-xs font-bold text-[#795A18]">
-              {order.status}
+              {statusLabel}
             </span>
           </div>
 
           <div className="mt-8 text-left">
             <h2 className="text-lg font-bold text-[#193B26]">
-              Order Summary
+              {t("orderSuccess.summaryTitle")}
             </h2>
 
             <div className="mt-4 space-y-4">
@@ -70,17 +81,17 @@ const OrderSuccessPage = () => {
                   <div className="h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-[#F7F3E9]">
                     <img
                       src={item.image}
-                      alt={item.name}
+                      alt={getProductName(item, language)}
                       className="h-full w-full object-cover"
                     />
                   </div>
 
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold text-[#193B26]">
-                      {item.name}
+                      {getProductName(item, language)}
                     </p>
                     <p className="mt-1 text-xs text-[#6F746B]">
-                      Qty: {item.quantity}
+                      {t("orderSuccess.qty")}: {item.quantity}
                     </p>
                   </div>
 
@@ -93,25 +104,25 @@ const OrderSuccessPage = () => {
 
             <div className="mt-6 space-y-3 border-t border-[#E8E4D9] pt-5 text-sm">
               <div className="flex justify-between text-[#6F746B]">
-                <span>Subtotal</span>
+                <span>{t("orderSuccess.subtotal")}</span>
                 <span>{formatPrice(order.subtotal)}</span>
               </div>
 
               <div className="flex justify-between text-[#6F746B]">
-                <span>Delivery Charge</span>
+                <span>{t("orderSuccess.deliveryCharge")}</span>
                 <span>{formatPrice(order.deliveryCharge)}</span>
               </div>
 
               {order.discount > 0 && (
                 <div className="flex justify-between text-green-700">
-                  <span>Discount</span>
+                  <span>{t("orderSuccess.discount")}</span>
                   <span>-{formatPrice(order.discount)}</span>
                 </div>
               )}
 
               <div className="flex justify-between border-t border-[#E8E4D9] pt-4">
                 <span className="font-bold text-[#193B26]">
-                  Total Paid on Delivery
+                  {t("orderSuccess.totalPaid")}
                 </span>
                 <span className="text-xl font-bold text-[#254D32]">
                   {formatPrice(order.total)}
@@ -125,10 +136,12 @@ const OrderSuccessPage = () => {
               <Phone className="shrink-0 text-[#254D32]" size={20} />
               <div>
                 <p className="text-sm font-bold text-[#193B26]">
-                  Order Confirmation
+                  {t("orderSuccess.confirmationTitle")}
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-[#6F746B]">
-                  We will call {order.customer.phone} to confirm your order.
+                  {t("orderSuccess.confirmationDesc", {
+                    phone: order.customer.phone,
+                  })}
                 </p>
               </div>
             </div>
@@ -137,7 +150,7 @@ const OrderSuccessPage = () => {
               <Truck className="shrink-0 text-[#254D32]" size={20} />
               <div>
                 <p className="text-sm font-bold text-[#193B26]">
-                  Delivery Address
+                  {t("orderSuccess.addressTitle")}
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-[#6F746B]">
                   {order.customer.address}, {order.customer.area},{" "}
@@ -150,10 +163,10 @@ const OrderSuccessPage = () => {
               <Package className="shrink-0 text-[#254D32]" size={20} />
               <div>
                 <p className="text-sm font-bold text-[#193B26]">
-                  Payment Method
+                  {t("orderSuccess.paymentTitle")}
                 </p>
                 <p className="mt-1 text-xs text-[#6F746B]">
-                  {order.paymentMethod}
+                  {paymentMethodLabel}
                 </p>
               </div>
             </div>
@@ -164,7 +177,7 @@ const OrderSuccessPage = () => {
             className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#254D32] px-6 py-4 font-bold text-white transition hover:bg-[#193B26]"
           >
             <ShoppingBag size={18} />
-            Continue Shopping
+            {t("orderSuccess.continueButton")}
           </Link>
         </div>
       </div>

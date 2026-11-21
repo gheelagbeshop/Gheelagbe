@@ -1,4 +1,3 @@
-
 import { useMemo, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
@@ -14,6 +13,8 @@ import {
 } from "lucide-react";
 
 import { getCart, clearCart } from "../utils/cart";
+import { getProductName } from "../data/products";
+import { useLanguage } from "../context/LanguageContext";
 
 const DELIVERY_CHARGE = 120;
 
@@ -33,6 +34,7 @@ const validateBangladeshPhone = (phone) => {
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
+  const { t, language } = useLanguage();
   const cartItems = useMemo(() => getCart(), []);
 
   const [formData, setFormData] = useState({
@@ -96,19 +98,19 @@ const CheckoutPage = () => {
     const coupon = COUPONS[code];
 
     if (!code) {
-      setCouponMessage("Please enter a coupon code.");
+      setCouponMessage(t("checkout.couponMsg.empty"));
       setAppliedCoupon(null);
       return;
     }
 
     if (!coupon) {
       setAppliedCoupon(null);
-      setCouponMessage("Invalid coupon code.");
+      setCouponMessage(t("checkout.couponMsg.invalid"));
       return;
     }
 
     setAppliedCoupon({ ...coupon, code });
-    setCouponMessage(`Coupon ${code} applied successfully!`);
+    setCouponMessage(t("checkout.couponMsg.applied", { code }));
   };
 
   const removeCoupon = () => {
@@ -121,37 +123,37 @@ const CheckoutPage = () => {
     const newErrors = {};
 
     if (!formData.fullName.trim()) {
-      newErrors.fullName = "Please enter your full name.";
+      newErrors.fullName = t("checkout.validation.fullName");
     }
 
     if (!validateBangladeshPhone(formData.phone)) {
-      newErrors.phone = "Enter a valid Bangladesh mobile number.";
+      newErrors.phone = t("checkout.validation.phone");
     }
 
     if (
       formData.alternatePhone &&
       !validateBangladeshPhone(formData.alternatePhone)
     ) {
-      newErrors.alternatePhone = "Enter a valid alternate phone number.";
+      newErrors.alternatePhone = t("checkout.validation.alternatePhone");
     }
 
     if (
       formData.email &&
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
     ) {
-      newErrors.email = "Enter a valid email address.";
+      newErrors.email = t("checkout.validation.email");
     }
 
     if (!formData.district.trim()) {
-      newErrors.district = "Please enter your district.";
+      newErrors.district = t("checkout.validation.district");
     }
 
     if (!formData.area.trim()) {
-      newErrors.area = "Please enter your area or thana.";
+      newErrors.area = t("checkout.validation.area");
     }
 
     if (!formData.address.trim()) {
-      newErrors.address = "Please enter your full delivery address.";
+      newErrors.address = t("checkout.validation.address");
     }
 
     setErrors(newErrors);
@@ -199,35 +201,35 @@ const CheckoutPage = () => {
       );
 
       localStorage.setItem(
-  "gheelagbe-last-order",
-  JSON.stringify(order)
-);
+        "gheelagbe-last-order",
+        JSON.stringify(order)
+      );
 
-// Send the order to Google Apps Script.
-// no-cors is used because Apps Script web apps have
-// cross-origin response limitations.
-const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+      // Send the order to Google Apps Script.
+      // no-cors is used because Apps Script web apps have
+      // cross-origin response limitations.
+      const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
 
-if (scriptUrl) {
-  await fetch(scriptUrl, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8",
-    },
-    body: JSON.stringify(order),
-  });
-}
+      if (scriptUrl) {
+        await fetch(scriptUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+          body: JSON.stringify(order),
+        });
+      }
 
-clearCart();
+      clearCart();
 
-navigate("/order-success", {
-  state: { orderId },
-  replace: true,
-});
+      navigate("/order-success", {
+        state: { orderId },
+        replace: true,
+      });
     } catch (error) {
       console.error("Order submission failed:", error);
-      alert("Something went wrong. Please try again.");
+      alert(t("checkout.validation.genericError"));
       setIsSubmitting(false);
     }
   };
@@ -247,18 +249,24 @@ navigate("/order-success", {
       <section className="border-b border-[#E8E4D9] bg-white">
         <div className="mx-auto max-w-7xl px-4 py-9 sm:px-6 lg:px-8">
           <div className="mb-3 flex items-center gap-2 text-sm text-[#6F746B]">
-            <Link to="/" className="hover:text-[#254D32]">Home</Link>
+            <Link to="/" className="hover:text-[#254D32]">
+              {t("checkout.hero.home")}
+            </Link>
             <span>/</span>
-            <Link to="/cart" className="hover:text-[#254D32]">Cart</Link>
+            <Link to="/cart" className="hover:text-[#254D32]">
+              {t("checkout.hero.cart")}
+            </Link>
             <span>/</span>
-            <span className="font-semibold text-[#254D32]">Checkout</span>
+            <span className="font-semibold text-[#254D32]">
+              {t("checkout.hero.current")}
+            </span>
           </div>
 
           <h1 className="text-4xl font-bold text-[#193B26] sm:text-5xl">
-            Complete Your Order
+            {t("checkout.hero.title")}
           </h1>
           <p className="mt-3 text-sm text-[#6F746B] sm:text-base">
-            Just a few details and your favorite products will be on their way.
+            {t("checkout.hero.description")}
           </p>
         </div>
       </section>
@@ -275,10 +283,10 @@ navigate("/order-success", {
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-[#193B26]">
-                      Customer Information
+                      {t("checkout.customer.title")}
                     </h2>
                     <p className="text-xs text-[#6F746B]">
-                      Enter your contact details
+                      {t("checkout.customer.subtitle")}
                     </p>
                   </div>
                 </div>
@@ -286,13 +294,13 @@ navigate("/order-success", {
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="sm:col-span-2">
                     <label className="text-sm font-semibold text-[#242820]">
-                      Full Name *
+                      {t("checkout.customer.fullName")}
                     </label>
                     <input
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleChange}
-                      placeholder="Enter your full name"
+                      placeholder={t("checkout.customer.fullNamePlaceholder")}
                       className={inputClass("fullName")}
                     />
                     <FieldError field="fullName" />
@@ -300,13 +308,13 @@ navigate("/order-success", {
 
                   <div>
                     <label className="text-sm font-semibold text-[#242820]">
-                      Phone Number *
+                      {t("checkout.customer.phone")}
                     </label>
                     <input
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="01XXXXXXXXX"
+                      placeholder={t("checkout.customer.phonePlaceholder")}
                       type="tel"
                       className={inputClass("phone")}
                     />
@@ -315,13 +323,13 @@ navigate("/order-success", {
 
                   <div>
                     <label className="text-sm font-semibold text-[#242820]">
-                      Alternate Phone
+                      {t("checkout.customer.alternatePhone")}
                     </label>
                     <input
                       name="alternatePhone"
                       value={formData.alternatePhone}
                       onChange={handleChange}
-                      placeholder="Optional"
+                      placeholder={t("checkout.customer.alternatePhonePlaceholder")}
                       type="tel"
                       className={inputClass("alternatePhone")}
                     />
@@ -330,13 +338,13 @@ navigate("/order-success", {
 
                   <div className="sm:col-span-2">
                     <label className="text-sm font-semibold text-[#242820]">
-                      Email Address
+                      {t("checkout.customer.email")}
                     </label>
                     <input
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="your@email.com (optional)"
+                      placeholder={t("checkout.customer.emailPlaceholder")}
                       type="email"
                       className={inputClass("email")}
                     />
@@ -353,23 +361,29 @@ navigate("/order-success", {
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-[#193B26]">
-                      Delivery Address
+                      {t("checkout.delivery.title")}
                     </h2>
                     <p className="text-xs text-[#6F746B]">
-                      Where should we deliver your order?
+                      {t("checkout.delivery.subtitle")}
                     </p>
                   </div>
                 </div>
 
                 <div>
                   <label className="text-sm font-semibold text-[#242820]">
-                    Delivery Zone *
+                    {t("checkout.delivery.zone")}
                   </label>
 
                   <div className="mt-3 grid gap-3 sm:grid-cols-2">
                     {[
-                      { value: "inside-dhaka", label: "Inside Dhaka" },
-                      { value: "outside-dhaka", label: "Outside Dhaka" },
+                      {
+                        value: "inside-dhaka",
+                        label: t("checkout.delivery.insideDhaka"),
+                      },
+                      {
+                        value: "outside-dhaka",
+                        label: t("checkout.delivery.outsideDhaka"),
+                      },
                     ].map((zone) => (
                       <label
                         key={zone.value}
@@ -394,20 +408,20 @@ navigate("/order-success", {
                     ))}
                   </div>
                   <p className="mt-2 text-xs text-[#6F746B]">
-                    Delivery charge: ৳120 for both zones.
+                    {t("checkout.delivery.rateNote")}
                   </p>
                 </div>
 
                 <div className="mt-5 grid gap-5 sm:grid-cols-2">
                   <div>
                     <label className="text-sm font-semibold text-[#242820]">
-                      District *
+                      {t("checkout.delivery.district")}
                     </label>
                     <input
                       name="district"
                       value={formData.district}
                       onChange={handleChange}
-                      placeholder="Enter district"
+                      placeholder={t("checkout.delivery.districtPlaceholder")}
                       readOnly={formData.zone === "inside-dhaka"}
                       className={`${inputClass("district")} ${
                         formData.zone === "inside-dhaka"
@@ -420,13 +434,13 @@ navigate("/order-success", {
 
                   <div>
                     <label className="text-sm font-semibold text-[#242820]">
-                      Area / Thana *
+                      {t("checkout.delivery.area")}
                     </label>
                     <input
                       name="area"
                       value={formData.area}
                       onChange={handleChange}
-                      placeholder="e.g. Mirpur, Dhanmondi"
+                      placeholder={t("checkout.delivery.areaPlaceholder")}
                       className={inputClass("area")}
                     />
                     <FieldError field="area" />
@@ -434,14 +448,14 @@ navigate("/order-success", {
 
                   <div className="sm:col-span-2">
                     <label className="text-sm font-semibold text-[#242820]">
-                      Full Address *
+                      {t("checkout.delivery.address")}
                     </label>
                     <textarea
                       name="address"
                       value={formData.address}
                       onChange={handleChange}
                       rows={4}
-                      placeholder="House number, road, village, landmark..."
+                      placeholder={t("checkout.delivery.addressPlaceholder")}
                       className={`${inputClass("address")} resize-none`}
                     />
                     <FieldError field="address" />
@@ -457,10 +471,10 @@ navigate("/order-success", {
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-[#193B26]">
-                      Payment Method
+                      {t("checkout.payment.title")}
                     </h2>
                     <p className="text-xs text-[#6F746B]">
-                      Available payment option
+                      {t("checkout.payment.subtitle")}
                     </p>
                   </div>
                 </div>
@@ -471,10 +485,10 @@ navigate("/order-success", {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-bold text-[#193B26]">
-                      Cash on Delivery
+                      {t("checkout.payment.codTitle")}
                     </h3>
                     <p className="mt-1 text-xs text-[#6F746B]">
-                      Pay when your order arrives.
+                      {t("checkout.payment.codDesc")}
                     </p>
                   </div>
                   <CheckCircle2 className="text-[#254D32]" />
@@ -484,17 +498,17 @@ navigate("/order-success", {
               {/* Order notes */}
               <section className="rounded-2xl border border-[#E8E4D9] bg-white p-5 sm:p-7">
                 <h2 className="text-xl font-bold text-[#193B26]">
-                  Additional Notes
+                  {t("checkout.notes.title")}
                 </h2>
                 <p className="mt-1 text-xs text-[#6F746B]">
-                  Any special instructions for your delivery?
+                  {t("checkout.notes.subtitle")}
                 </p>
                 <textarea
                   name="notes"
                   value={formData.notes}
                   onChange={handleChange}
                   rows={3}
-                  placeholder="Optional order notes..."
+                  placeholder={t("checkout.notes.placeholder")}
                   className={`${inputClass("notes")} resize-none`}
                 />
               </section>
@@ -506,7 +520,7 @@ navigate("/order-success", {
                 <div className="mb-5 flex items-center gap-3">
                   <ShoppingBag className="text-[#254D32]" size={22} />
                   <h2 className="text-xl font-bold text-[#193B26]">
-                    Your Order
+                    {t("checkout.summary.title")}
                   </h2>
                 </div>
 
@@ -516,7 +530,7 @@ navigate("/order-success", {
                       <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-[#F7F3E9]">
                         <img
                           src={item.image}
-                          alt={item.name}
+                          alt={getProductName(item, language)}
                           className="h-full w-full object-cover"
                         />
                         <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#254D32] px-1 text-[10px] font-bold text-white">
@@ -526,10 +540,12 @@ navigate("/order-success", {
 
                       <div className="min-w-0 flex-1">
                         <p className="line-clamp-2 text-sm font-semibold text-[#193B26]">
-                          {item.name}
+                          {getProductName(item, language)}
                         </p>
                         <p className="mt-1 text-xs text-[#6F746B]">
-                          {item.weight}
+                          {language === "bn" && item.weight_bn
+                            ? item.weight_bn
+                            : item.weight}
                         </p>
                       </div>
 
@@ -543,14 +559,14 @@ navigate("/order-success", {
                 {/* Coupon */}
                 <div className="mt-6 border-t border-[#E8E4D9] pt-5">
                   <label className="text-sm font-semibold text-[#193B26]">
-                    Coupon Code
+                    {t("checkout.summary.couponLabel")}
                   </label>
 
                   <div className="mt-2 flex gap-2">
                     <input
                       value={couponInput}
                       onChange={(event) => setCouponInput(event.target.value)}
-                      placeholder="Enter coupon"
+                      placeholder={t("checkout.summary.couponPlaceholder")}
                       disabled={Boolean(appliedCoupon)}
                       className="min-w-0 flex-1 rounded-xl border border-[#E8E4D9] px-3 py-3 text-sm uppercase outline-none focus:border-[#254D32] disabled:bg-[#F7F3E9]"
                     />
@@ -561,7 +577,7 @@ navigate("/order-success", {
                         onClick={removeCoupon}
                         className="rounded-xl border border-red-200 px-4 text-sm font-semibold text-red-500"
                       >
-                        Remove
+                        {t("checkout.summary.remove")}
                       </button>
                     ) : (
                       <button
@@ -569,34 +585,36 @@ navigate("/order-success", {
                         onClick={applyCoupon}
                         className="rounded-xl bg-[#E8F0E8] px-4 text-sm font-bold text-[#254D32] hover:bg-[#dce9dc]"
                       >
-                        Apply
+                        {t("checkout.summary.apply")}
                       </button>
                     )}
                   </div>
 
                   {couponMessage && (
-                    <p className={`mt-2 text-xs ${
-                      appliedCoupon ? "text-green-700" : "text-red-500"
-                    }`}>
+                    <p
+                      className={`mt-2 text-xs ${
+                        appliedCoupon ? "text-green-700" : "text-red-500"
+                      }`}
+                    >
                       {couponMessage}
                     </p>
                   )}
                   <p className="mt-2 text-[11px] text-[#9A9E94]">
-                    Demo codes: GHEE10 or SAVE100
+                    {t("checkout.summary.demoHint")}
                   </p>
                 </div>
 
                 {/* Price breakdown */}
                 <div className="mt-6 space-y-3 border-t border-dashed border-[#E8E4D9] pt-5 text-sm">
                   <div className="flex justify-between text-[#6F746B]">
-                    <span>Subtotal</span>
+                    <span>{t("checkout.summary.subtotal")}</span>
                     <span className="font-semibold text-[#242820]">
                       {formatPrice(subtotal)}
                     </span>
                   </div>
 
                   <div className="flex justify-between text-[#6F746B]">
-                    <span>Delivery Charge</span>
+                    <span>{t("checkout.summary.deliveryCharge")}</span>
                     <span className="font-semibold text-[#242820]">
                       {formatPrice(DELIVERY_CHARGE)}
                     </span>
@@ -604,7 +622,7 @@ navigate("/order-success", {
 
                   {discount > 0 && (
                     <div className="flex justify-between text-green-700">
-                      <span>Discount</span>
+                      <span>{t("checkout.summary.discount")}</span>
                       <span className="font-semibold">
                         -{formatPrice(discount)}
                       </span>
@@ -613,7 +631,7 @@ navigate("/order-success", {
 
                   <div className="flex justify-between border-t border-[#E8E4D9] pt-4">
                     <span className="font-bold text-[#193B26]">
-                      Total Amount
+                      {t("checkout.summary.totalAmount")}
                     </span>
                     <span className="text-xl font-bold text-[#254D32]">
                       {formatPrice(total)}
@@ -626,13 +644,14 @@ navigate("/order-success", {
                   disabled={isSubmitting}
                   className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#254D32] px-5 py-4 font-bold text-white transition hover:bg-[#193B26] disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {isSubmitting ? "Placing Order..." : "Place Order"}
+                  {isSubmitting
+                    ? t("checkout.summary.placingOrder")
+                    : t("checkout.summary.placeOrder")}
                   {!isSubmitting && <ArrowRight size={19} />}
                 </button>
 
                 <p className="mt-4 text-center text-xs leading-relaxed text-[#6F746B]">
-                  By placing your order, you agree to our order and delivery
-                  process. Our team will call you to confirm your order.
+                  {t("checkout.summary.agreement")}
                 </p>
               </section>
 
@@ -640,10 +659,10 @@ navigate("/order-success", {
                 <Package className="shrink-0 text-[#254D32]" size={22} />
                 <div>
                   <p className="text-sm font-bold text-[#193B26]">
-                    Need help?
+                    {t("checkout.summary.needHelpTitle")}
                   </p>
                   <p className="mt-1 text-xs leading-relaxed text-[#6F746B]">
-                    Our team will contact you by phone to confirm your order.
+                    {t("checkout.summary.needHelpDesc")}
                   </p>
                 </div>
               </div>
@@ -653,7 +672,7 @@ navigate("/order-success", {
                 className="flex items-center justify-center gap-2 text-sm font-semibold text-[#254D32] hover:underline"
               >
                 <ArrowLeft size={16} />
-                Back to Cart
+                {t("checkout.summary.backToCart")}
               </Link>
             </aside>
           </div>
