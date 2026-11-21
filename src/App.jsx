@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { LanguageProvider } from "./context/LanguageContext";
 
 import Root from "./components/Root";
 import HomePage from "./Pages/HomePage";
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "about", element: <AboutUsPage /> },
       { path: "products", element: <ProductsPage /> },
+      { path: "shop", element: <ProductsPage /> },
       { path: "product/:slug", element: <ProductDetails /> },
       { path: "cart", element: <CartPage /> },
       { path: "checkout", element: <CheckoutPage /> },
@@ -30,5 +32,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <LanguageProvider>
+      <RouterProvider router={router} />
+    </LanguageProvider>
+  );
 }

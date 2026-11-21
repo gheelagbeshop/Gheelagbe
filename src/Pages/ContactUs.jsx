@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   ArrowRight,
@@ -9,59 +8,14 @@ import {
   MessageCircle,
   Phone,
   Send,
-  CheckCircle2,
   Leaf,
   ChevronDown,
 } from "lucide-react";
-
-const contactDetails = [
-  {
-    icon: Phone,
-    title: "Call Us",
-    value: "+880 1644-945406",
-    description: "Talk directly with our team",
-    href: "tel:+8801644945406",
-  },
-  {
-    icon: Mail,
-    title: "Email Us",
-    value: "hello@gheelagbe.com",
-    description: "Send us your questions anytime",
-    href: "mailto:hello@gheelagbe.com",
-  },
-  {
-    icon: MapPin,
-    title: "Our Location",
-    value: "Dhaka, Bangladesh",
-    description: "Proudly serving customers across Bangladesh",
-    href: null,
-  },
-];
-
-const faqs = [
-  {
-    question: "How can I place an order?",
-    answer:
-      "You can browse our products, add your favorites to the cart, and complete checkout with your contact and delivery information. No account is required.",
-  },
-  {
-    question: "How can I track my order?",
-    answer:
-      "After placing your order, one of our representatives will contact you to confirm your order and discuss delivery details.",
-  },
-  {
-    question: "Do you offer delivery across Bangladesh?",
-    answer:
-      "We aim to serve customers across Bangladesh. Please contact our team to confirm delivery availability in your area.",
-  },
-  {
-    question: "What payment methods do you accept?",
-    answer:
-      "We support available payment options including Cash on Delivery and mobile financial services, depending on your order and delivery location.",
-  },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 export default function ContactUs() {
+  const { t } = useLanguage();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -71,6 +25,32 @@ export default function ContactUs() {
   });
 
   const [openFaq, setOpenFaq] = useState(0);
+
+  const contactDetails = [
+    {
+      icon: Phone,
+      title: t("contact.info.callTitle"),
+      value: "+880 1644-945406",
+      description: t("contact.info.callDesc"),
+      href: "tel:+8801644945406",
+    },
+    {
+      icon: Mail,
+      title: t("contact.info.emailTitle"),
+      value: "hello@gheelagbe.com",
+      description: t("contact.info.emailDesc"),
+      href: "mailto:hello@gheelagbe.com",
+    },
+    {
+      icon: MapPin,
+      title: t("contact.info.locationTitle"),
+      value: t("contact.info.locationValue"),
+      description: t("contact.info.locationDesc"),
+      href: null,
+    },
+  ];
+
+  const faqItems = t("contact.faq.items") || [];
 
   const handleChange = (e) => {
     setFormData({
@@ -82,9 +62,8 @@ export default function ContactUs() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Connect this form to your backend/API before production.
     console.log("Contact form submission:", formData);
-    alert("Thank you! Your message has been submitted.");
+    alert(t("contact.form.submittedAlert"));
 
     setFormData({
       name: "",
@@ -99,24 +78,22 @@ export default function ContactUs() {
     <main className="bg-[#FFF9EE] text-[#242820]">
       {/* HERO */}
       <section className="relative overflow-hidden px-5 py-20 sm:px-8 lg:px-16 lg:py-28">
-        {/* <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#E8F0E8] blur-3xl" /> */}
-        {/* <div className="absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-[#F5E7C5] blur-3xl" /> */}
-
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
           <div>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#254D32]/15 bg-white/70 px-4 py-2 text-sm font-semibold text-[#254D32]">
               <Leaf size={16} />
-              We'd love to hear from you
+              {t("contact.hero.badge")}
             </div>
 
-            <h1 className="max-w-xl font-['DM_Serif_Display'] text-5xl leading-[1.12] sm:text-6xl lg:text-7xl">
-              Let's Start a
-              <span className="block text-[#254D32]">Conversation.</span>
+            <h1 className="max-w-xl font-heading text-5xl leading-[1.12] sm:text-6xl lg:text-7xl">
+              {t("contact.hero.titleStart")}
+              <span className="block text-[#254D32]">
+                {t("contact.hero.titleHighlight")}
+              </span>
             </h1>
 
             <p className="mt-6 max-w-lg text-base leading-8 text-[#6F746B] sm:text-lg">
-              Have a question about our products, an order, or simply want to
-              say hello? We're always happy to help you.
+              {t("contact.hero.description")}
             </p>
 
             <div className="mt-9 flex flex-wrap gap-4">
@@ -124,7 +101,7 @@ export default function ContactUs() {
                 href="#contact-form"
                 className="inline-flex items-center gap-3 rounded-full bg-[#254D32] px-7 py-4 text-sm font-bold text-white transition hover:bg-[#193B26]"
               >
-                Send a Message
+                {t("contact.hero.sendMessage")}
                 <ArrowRight size={18} />
               </a>
 
@@ -135,7 +112,7 @@ export default function ContactUs() {
                 className="inline-flex items-center gap-3 rounded-full border border-[#254D32]/20 bg-white px-7 py-4 text-sm font-bold text-[#254D32] transition hover:bg-[#E8F0E8]"
               >
                 <MessageCircle size={18} />
-                WhatsApp Us
+                {t("contact.hero.whatsappUs")}
               </a>
             </div>
           </div>
@@ -155,9 +132,11 @@ export default function ContactUs() {
                 <MessageCircle size={23} />
               </div>
               <div>
-                <p className="font-bold text-[#242820]">We're here for you</p>
+                <p className="font-bold text-[#242820]">
+                  {t("contact.hero.satisfactionTitle")}
+                </p>
                 <p className="text-xs text-[#6F746B]">
-                  Your satisfaction matters
+                  {t("contact.hero.satisfactionDesc")}
                 </p>
               </div>
             </div>
@@ -174,13 +153,13 @@ export default function ContactUs() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 text-center">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#B48A35]">
-              Get in touch
+              {t("contact.info.tagline")}
             </p>
-            <h2 className="mt-3 font-['DM_Serif_Display'] text-3xl sm:text-4xl">
-              We're Just a Message Away
+            <h2 className="mt-3 font-heading text-3xl sm:text-4xl">
+              {t("contact.info.heading")}
             </h2>
             <p className="mt-3 text-[#6F746B]">
-              Choose the easiest way to reach our team.
+              {t("contact.info.description")}
             </p>
           </div>
 
@@ -235,17 +214,18 @@ export default function ContactUs() {
 
             <div className="relative">
               <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#D9A441]">
-                Contact us
+                {t("contact.form.tagline")}
               </p>
 
-              <h2 className="mt-5 font-['DM_Serif_Display'] text-4xl leading-tight sm:text-5xl">
-                Have Something
-                <span className="block text-[#D9A441]">On Your Mind?</span>
+              <h2 className="mt-5 font-heading text-4xl leading-tight sm:text-5xl">
+                {t("contact.form.headingStart")}
+                <span className="block text-[#D9A441]">
+                  {t("contact.form.headingHighlight")}
+                </span>
               </h2>
 
               <p className="mt-6 max-w-sm leading-8 text-white/70">
-                Whether it's about our products, your order, or a partnership,
-                send us a message. Our team will be happy to assist.
+                {t("contact.form.description")}
               </p>
 
               <div className="mt-12 space-y-7">
@@ -254,9 +234,11 @@ export default function ContactUs() {
                     <Clock size={21} />
                   </div>
                   <div>
-                    <h3 className="font-bold">Customer Support</h3>
+                    <h3 className="font-bold">
+                      {t("contact.form.supportTitle")}
+                    </h3>
                     <p className="mt-1 text-sm text-white/60">
-                      Contact us for current support hours.
+                      {t("contact.form.supportDesc")}
                     </p>
                   </div>
                 </div>
@@ -266,20 +248,22 @@ export default function ContactUs() {
                     <MessageCircle size={21} />
                   </div>
                   <div>
-                    <h3 className="font-bold">Friendly Assistance</h3>
+                    <h3 className="font-bold">
+                      {t("contact.form.friendlyTitle")}
+                    </h3>
                     <p className="mt-1 text-sm text-white/60">
-                      We're happy to answer your questions.
+                      {t("contact.form.friendlyDesc")}
                     </p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-14 border-t border-white/15 pt-7">
-                <p className="font-['DM_Serif_Display'] text-2xl italic text-[#F5E7C5]">
-                  Pure goodness, genuine care.
+                <p className="font-heading text-2xl italic text-[#F5E7C5]">
+                  {t("contact.form.quote")}
                 </p>
                 <p className="mt-2 text-sm text-white/50">
-                  — Team GheeLagbe
+                  {t("contact.form.quoteAuthor")}
                 </p>
               </div>
             </div>
@@ -288,11 +272,11 @@ export default function ContactUs() {
           {/* RIGHT SIDE - FORM */}
           <div className="bg-white p-7 sm:p-12">
             <div className="mb-8">
-              <h3 className="font-['DM_Serif_Display'] text-3xl">
-                Send Us a Message
+              <h3 className="font-heading text-3xl">
+                {t("contact.form.formTitle")}
               </h3>
               <p className="mt-2 text-sm text-[#6F746B]">
-                Fill out the form below and we'll get back to you.
+                {t("contact.form.formSubtitle")}
               </p>
             </div>
 
@@ -300,14 +284,14 @@ export default function ContactUs() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label className="mb-2 block text-sm font-semibold">
-                    Your Name *
+                    {t("contact.form.nameLabel")}
                   </label>
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Enter your name"
+                    placeholder={t("contact.form.namePlaceholder")}
                     required
                     className="w-full rounded-xl border border-[#E8E4D9] bg-[#FFF9EE]/50 px-4 py-3.5 text-sm outline-none transition placeholder:text-[#9B9E96] focus:border-[#254D32] focus:ring-4 focus:ring-[#254D32]/10"
                   />
@@ -315,14 +299,14 @@ export default function ContactUs() {
 
                 <div>
                   <label className="mb-2 block text-sm font-semibold">
-                    Email Address
+                    {t("contact.form.emailLabel")}
                   </label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="you@example.com"
+                    placeholder={t("contact.form.emailPlaceholder")}
                     className="w-full rounded-xl border border-[#E8E4D9] bg-[#FFF9EE]/50 px-4 py-3.5 text-sm outline-none transition placeholder:text-[#9B9E96] focus:border-[#254D32] focus:ring-4 focus:ring-[#254D32]/10"
                   />
                 </div>
@@ -331,14 +315,14 @@ export default function ContactUs() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label className="mb-2 block text-sm font-semibold">
-                    Phone Number *
+                    {t("contact.form.phoneLabel")}
                   </label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="+880 1XXX-XXXXXX"
+                    placeholder={t("contact.form.phonePlaceholder")}
                     required
                     className="w-full rounded-xl border border-[#E8E4D9] bg-[#FFF9EE]/50 px-4 py-3.5 text-sm outline-none transition placeholder:text-[#9B9E96] focus:border-[#254D32] focus:ring-4 focus:ring-[#254D32]/10"
                   />
@@ -346,7 +330,7 @@ export default function ContactUs() {
 
                 <div>
                   <label className="mb-2 block text-sm font-semibold">
-                    Subject *
+                    {t("contact.form.subjectLabel")}
                   </label>
                   <select
                     name="subject"
@@ -355,27 +339,35 @@ export default function ContactUs() {
                     required
                     className="w-full rounded-xl border border-[#E8E4D9] bg-[#FFF9EE]/50 px-4 py-3.5 text-sm outline-none transition focus:border-[#254D32] focus:ring-4 focus:ring-[#254D32]/10"
                   >
-                    <option value="">Select a subject</option>
-                    <option value="Product Inquiry">Product Inquiry</option>
-                    <option value="Order Support">Order Support</option>
-                    <option value="Delivery Question">Delivery Question</option>
-                    <option value="Business Partnership">
-                      Business Partnership
+                    <option value="">{t("contact.form.selectSubject")}</option>
+                    <option value="Product Inquiry">
+                      {t("contact.form.subjects.product")}
                     </option>
-                    <option value="Other">Other</option>
+                    <option value="Order Support">
+                      {t("contact.form.subjects.order")}
+                    </option>
+                    <option value="Delivery Question">
+                      {t("contact.form.subjects.delivery")}
+                    </option>
+                    <option value="Business Partnership">
+                      {t("contact.form.subjects.partnership")}
+                    </option>
+                    <option value="Other">
+                      {t("contact.form.subjects.other")}
+                    </option>
                   </select>
                 </div>
               </div>
 
               <div>
                 <label className="mb-2 block text-sm font-semibold">
-                  Your Message *
+                  {t("contact.form.messageLabel")}
                 </label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell us how we can help you..."
+                  placeholder={t("contact.form.messagePlaceholder")}
                   rows={5}
                   required
                   className="w-full resize-none rounded-xl border border-[#E8E4D9] bg-[#FFF9EE]/50 px-4 py-3.5 text-sm outline-none transition placeholder:text-[#9B9E96] focus:border-[#254D32] focus:ring-4 focus:ring-[#254D32]/10"
@@ -386,7 +378,7 @@ export default function ContactUs() {
                 type="submit"
                 className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#254D32] px-7 py-4 text-sm font-bold text-white transition hover:bg-[#193B26] sm:w-auto"
               >
-                Send Message
+                {t("contact.form.submitButton")}
                 <Send
                   size={17}
                   className="transition group-hover:translate-x-1"
@@ -394,8 +386,7 @@ export default function ContactUs() {
               </button>
 
               <p className="text-xs leading-5 text-[#8A8D84]">
-                * Required fields. Your information will only be used to
-                respond to your inquiry.
+                {t("contact.form.requiredNote")}
               </p>
             </form>
           </div>
@@ -407,14 +398,13 @@ export default function ContactUs() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#B48A35]">
-              Need some help?
+              {t("contact.faq.tagline")}
             </p>
-            <h2 className="mt-4 max-w-md font-['DM_Serif_Display'] text-4xl leading-tight sm:text-5xl">
-              Frequently Asked Questions
+            <h2 className="mt-4 max-w-md font-heading text-4xl leading-tight sm:text-5xl">
+              {t("contact.faq.heading")}
             </h2>
             <p className="mt-5 max-w-md leading-7 text-[#6F746B]">
-              Find quick answers to some common questions. Still need help?
-              Feel free to contact our team.
+              {t("contact.faq.description")}
             </p>
 
             <a
@@ -423,43 +413,44 @@ export default function ContactUs() {
               rel="noreferrer"
               className="mt-8 inline-flex items-center gap-2 font-bold text-[#254D32] transition hover:gap-4"
             >
-              Ask us directly
+              {t("contact.faq.askDirectly")}
               <ArrowRight size={18} />
             </a>
           </div>
 
           <div className="space-y-3">
-            {faqs.map((faq, index) => (
-              <div
-                key={faq.question}
-                className="overflow-hidden rounded-2xl border border-[#E8E4D9] bg-white"
-              >
-                <button
-                  type="button"
-                  onClick={() =>
-                    setOpenFaq(openFaq === index ? -1 : index)
-                  }
-                  className="flex w-full items-center justify-between gap-4 p-5 text-left"
+            {Array.isArray(faqItems) &&
+              faqItems.map((faq, index) => (
+                <div
+                  key={faq.question}
+                  className="overflow-hidden rounded-2xl border border-[#E8E4D9] bg-white"
                 >
-                  <span className="font-bold">{faq.question}</span>
-                  <ChevronDown
-                    size={20}
-                    className={`shrink-0 text-[#254D32] transition-transform ${
-                      openFaq === index ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOpenFaq(openFaq === index ? -1 : index)
+                    }
+                    className="flex w-full items-center justify-between gap-4 p-5 text-left"
+                  >
+                    <span className="font-bold">{faq.question}</span>
+                    <ChevronDown
+                      size={20}
+                      className={`shrink-0 text-[#254D32] transition-transform ${
+                        openFaq === index ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
 
-                {openFaq === index && (
-                  <div className="px-5 pb-5">
-                    <div className="h-px bg-[#E8E4D9]" />
-                    <p className="pt-4 text-sm leading-7 text-[#6F746B]">
-                      {faq.answer}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
+                  {openFaq === index && (
+                    <div className="px-5 pb-5">
+                      <div className="h-px bg-[#E8E4D9]" />
+                      <p className="pt-4 text-sm leading-7 text-[#6F746B]">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
           </div>
         </div>
       </section>

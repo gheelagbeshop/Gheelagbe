@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import {
@@ -6,18 +5,21 @@ import {
   X,
   Search,
   ShoppingBag,
+  Globe,
 } from "lucide-react";
 
 import { getCartCount } from "../../utils/cart";
+import { useLanguage } from "../../context/LanguageContext";
 
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "Products", href: "/products" },
-  { name: "About Us", href: "/about" },
-  { name: "Contact", href: "/contact" },
+const navKeys = [
+  { key: "home", href: "/" },
+  { key: "products", href: "/products" },
+  { key: "about", href: "/about" },
+  { key: "contact", href: "/contact" },
 ];
 
 const Navbar = () => {
+  const { t, language, toggleLanguage } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(getCartCount);
 
@@ -56,15 +58,15 @@ const Navbar = () => {
           </span>
 
           <span className="mt-0.5 block text-[9px] font-semibold uppercase tracking-[0.22em] text-text-secondary">
-            Purely Natural
+            {t("header.logoTagline")}
           </span>
         </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-8 lg:flex">
-          {navLinks.map((link) => (
+          {navKeys.map((link) => (
             <NavLink
-              key={link.name}
+              key={link.key}
               to={link.href}
               className={({ isActive }) =>
                 `relative py-2 text-sm font-semibold transition-colors duration-200 ${
@@ -76,7 +78,7 @@ const Navbar = () => {
             >
               {({ isActive }) => (
                 <>
-                  {link.name}
+                  {t(`header.nav.${link.key}`)}
 
                   {isActive && (
                     <span className="absolute -bottom-1 left-0 h-0.5 w-full rounded-full bg-accent" />
@@ -88,32 +90,49 @@ const Navbar = () => {
         </div>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-3">
+
+          {/* Language Toggle Button */}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            aria-label={
+              language === "bn"
+                ? "Switch language to English"
+                : "বাংলা ভাষায় পরিবর্তন করুন"
+            }
+            className="flex items-center gap-1.5 rounded-full border border-[#254D32]/25 bg-white/90 px-3 py-1.5 text-xs font-bold text-primary shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary hover:text-white"
+          >
+            <Globe size={14} className="shrink-0" />
+            <span className="tracking-wide">
+              {language === "bn" ? "EN" : "বাংলা"}
+            </span>
+          </button>
 
           {/* Search */}
           <Link
             to="/products"
-            aria-label="Search products"
+            aria-label={t("header.searchAria")}
             className="flex h-10 w-10 items-center justify-center rounded-full text-text transition-colors hover:bg-primary-light hover:text-primary"
           >
-            <Search size={21} strokeWidth={1.8} />
+            <Search size={20} strokeWidth={1.8} />
           </Link>
 
           {/* Cart */}
           <Link
             to="/cart"
             onClick={closeMenu}
-            aria-label={`Shopping cart with ${cartCount} items`}
+            aria-label={t("header.cartAria", { count: cartCount })}
             className="group relative flex items-center gap-2 rounded-full p-2.5 transition-colors hover:bg-primary-light sm:px-4"
           >
             <ShoppingBag
-              size={21}
+              size={20}
               strokeWidth={1.8}
               className="text-primary transition-transform group-hover:scale-110"
             />
 
             <span className="hidden text-sm font-semibold text-text sm:block">
-              Cart
+              {t("header.cart")}
             </span>
 
             {/* Dynamic Cart Badge */}
@@ -128,7 +147,7 @@ const Navbar = () => {
           <button
             type="button"
             onClick={() => setIsMenuOpen((prev) => !prev)}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-label={isMenuOpen ? t("header.menuClose") : t("header.menuOpen")}
             aria-expanded={isMenuOpen}
             className="flex h-10 w-10 items-center justify-center rounded-lg text-primary transition-colors hover:bg-primary-light lg:hidden"
           >
@@ -145,14 +164,14 @@ const Navbar = () => {
       <div
         className={`absolute left-0 right-0 top-full overflow-hidden border-b border-default bg-cream shadow-lg transition-all duration-300 ease-in-out lg:hidden ${
           isMenuOpen
-            ? "visible max-h-80 translate-y-0 opacity-100"
+            ? "visible max-h-96 translate-y-0 opacity-100"
             : "invisible max-h-0 -translate-y-2 opacity-0"
         }`}
       >
         <div className="container-custom flex flex-col py-3">
-          {navLinks.map((link) => (
+          {navKeys.map((link) => (
             <NavLink
-              key={link.name}
+              key={link.key}
               to={link.href}
               onClick={closeMenu}
               className={({ isActive }) =>
@@ -165,7 +184,7 @@ const Navbar = () => {
             >
               {({ isActive }) => (
                 <>
-                  {link.name}
+                  {t(`header.nav.${link.key}`)}
 
                   {isActive && (
                     <span className="h-2 w-2 rounded-full bg-accent" />
@@ -183,11 +202,12 @@ const Navbar = () => {
           >
             <span className="flex items-center gap-3">
               <ShoppingBag size={18} />
-              My Cart
+              {t("header.myCart")}
             </span>
 
             <span className="rounded-full bg-primary px-2.5 py-1 text-xs text-white">
-              {cartCount} {cartCount === 1 ? "Item" : "Items"}
+              {cartCount}{" "}
+              {cartCount === 1 ? t("header.item") : t("header.items")}
             </span>
           </Link>
         </div>

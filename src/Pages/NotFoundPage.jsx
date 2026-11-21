@@ -1,29 +1,26 @@
-
 import { Link } from "react-router-dom";
 import {
-  ArrowLeft,
   ArrowRight,
   Home,
   ShoppingBag,
   Leaf,
-  Search,
   Sparkles,
 } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 const NotFoundPage = () => {
+  const { t } = useLanguage();
+
   return (
     <main className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-[#FFF9EE] px-4 py-16 sm:px-6">
-
       {/* Background Decorations */}
       <div className="pointer-events-none absolute -left-40 top-10 h-80 w-80 rounded-full bg-[#E8F0E8] opacity-70 blur-3xl" />
 
       <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-[#F5E7C5] opacity-60 blur-3xl" />
 
       <div className="relative z-10 mx-auto w-full max-w-3xl text-center">
-
         {/* Illustration */}
         <div className="relative mx-auto mb-8 flex h-52 w-52 items-center justify-center sm:mb-10 sm:h-64 sm:w-64">
-
           {/* Decorative Circles */}
           <div className="absolute inset-0 rounded-full border border-[#D9A441]/30" />
 
@@ -64,27 +61,25 @@ const NotFoundPage = () => {
           <span className="h-2 w-2 rounded-full bg-[#D9A441]" />
 
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#254D32] sm:text-xs">
-            Page Not Found
+            {t("notFound.badge")}
           </span>
         </div>
 
         {/* Heading */}
         <h1 className="font-heading text-4xl leading-tight text-[#242820] sm:text-5xl lg:text-6xl">
-          Oops! This Page
+          {t("notFound.titleStart")}
           <span className="block text-[#254D32]">
-            Went Missing.
+            {t("notFound.titleHighlight")}
           </span>
         </h1>
 
         {/* Description */}
         <p className="mx-auto mt-5 max-w-md text-sm leading-7 text-[#6F746B] sm:text-base sm:leading-8">
-          Looks like the page you're looking for has taken a little detour.
-          Don't worry, there's plenty of goodness waiting for you at GheeLagbe!
+          {t("notFound.description")}
         </p>
 
         {/* Action Buttons */}
         <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-
           {/* Back Home */}
           <Link
             to="/"
@@ -92,7 +87,7 @@ const NotFoundPage = () => {
           >
             <Home size={18} />
 
-            Back to Home
+            {t("notFound.backHome")}
 
             <ArrowRight
               size={17}
@@ -102,12 +97,12 @@ const NotFoundPage = () => {
 
           {/* Shop */}
           <Link
-            to="/shop"
+            to="/products"
             className="group inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-full border border-[#D9DFD5] bg-white/70 px-7 py-3.5 text-sm font-bold text-[#254D32] transition-all duration-300 hover:-translate-y-1 hover:border-[#254D32] hover:bg-[#E8F0E8] sm:w-auto"
           >
             <ShoppingBag size={18} />
 
-            Explore Products
+            {t("notFound.exploreProducts")}
 
             <ArrowRight
               size={17}
@@ -121,7 +116,7 @@ const NotFoundPage = () => {
           <Leaf size={15} className="text-[#254D32]" />
 
           <p className="text-xs font-medium text-[#8B9186]">
-            Goodness in Every Home.
+            {t("notFound.footerNote")}
           </p>
         </div>
       </div>

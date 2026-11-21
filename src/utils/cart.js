@@ -13,12 +13,24 @@ export const addToCart = (product, quantity = 1) => {
   const cart = getCart();
   const existingItem = cart.find((item) => item.id === product.id);
 
+  const englishName =
+    product.name_en ||
+    (typeof product.name === "string" ? product.name : product.name?.en || "");
+  const banglaName =
+    product.name_bn ||
+    (typeof product.name === "object" ? product.name?.bn : "");
+
   let updatedCart;
 
   if (existingItem) {
     updatedCart = cart.map((item) =>
       item.id === product.id
-        ? { ...item, quantity: item.quantity + quantity }
+        ? {
+            ...item,
+            quantity: item.quantity + quantity,
+            name_bn: item.name_bn || banglaName,
+            name_en: item.name_en || englishName,
+          }
         : item
     );
   } else {
@@ -27,10 +39,13 @@ export const addToCart = (product, quantity = 1) => {
       {
         id: product.id,
         slug: product.slug,
-        name: product.name,
+        name: englishName || product.name,
+        name_bn: banglaName,
+        name_en: englishName,
         price: product.price,
         image: product.image,
         weight: product.weight,
+        weight_bn: product.weight_bn,
         quantity,
       },
     ];

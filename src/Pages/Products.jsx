@@ -1,4 +1,3 @@
-
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -16,16 +15,30 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import { products, categories } from "../data/products";
+import {
+  products,
+  categories,
+  getProductName,
+  getProductDescription,
+  getProductBadge,
+  getProductCategory,
+  getProductWeight,
+  getCategoryName,
+} from "../data/products";
 import { addToCart } from "../utils/cart";
+import { useLanguage } from "../context/LanguageContext";
 
 const MAX_PRICE = Math.max(...products.map((p) => p.price));
 
 const formatPrice = (price) =>
   `৳${price.toLocaleString("en-BD")}`;
 
-function ProductCard({ product, wishlist, toggleWishlist, onAddToCart }) {
+function ProductCard({ product, wishlist, toggleWishlist, onAddToCart, language, t }) {
   const isWishlisted = wishlist.includes(product.id);
+  const badge = getProductBadge(product, language);
+  const productName = getProductName(product, language);
+  const categoryName = getProductCategory(product, language);
+  const weight = getProductWeight(product, language);
 
   return (
     <article className="group relative overflow-hidden rounded-2xl border border-[#E8E4D9] bg-white transition duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -33,21 +46,22 @@ function ProductCard({ product, wishlist, toggleWishlist, onAddToCart }) {
         <Link to={`/product/${product.slug}`}>
           <img
             src={product.image}
-            alt={product.name}
+            alt={productName}
             loading="lazy"
             className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
           />
         </Link>
 
-        {product.badge && (
+        {badge && (
           <span className="absolute left-3 top-3 rounded-full bg-[#254D32] px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white">
-            {product.badge}
+            {badge}
           </span>
         )}
 
         {product.oldPrice && (
           <span className="absolute bottom-3 left-3 rounded-full bg-[#D9A441] px-3 py-1 text-[10px] font-bold text-[#242820]">
-            SAVE {Math.round(
+            {t("products.card.save")}{" "}
+            {Math.round(
               ((product.oldPrice - product.price) / product.oldPrice) * 100
             )}%
           </span>
@@ -56,7 +70,11 @@ function ProductCard({ product, wishlist, toggleWishlist, onAddToCart }) {
         <button
           type="button"
           onClick={() => toggleWishlist(product.id)}
-          aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+          aria-label={
+            isWishlisted
+              ? t("products.card.removeFromWishlist")
+              : t("products.card.addToWishlist")
+          }
           className={`absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full shadow-sm transition ${
             isWishlisted
               ? "bg-[#254D32] text-white"
@@ -69,7 +87,7 @@ function ProductCard({ product, wishlist, toggleWishlist, onAddToCart }) {
         <Link
           to={`/product/${product.slug}`}
           className="absolute bottom-3 right-3 hidden h-10 w-10 items-center justify-center rounded-full bg-white text-[#254D32] shadow-sm transition hover:bg-[#254D32] hover:text-white sm:flex"
-          aria-label="View product"
+          aria-label={t("products.card.viewProduct")}
         >
           <ShoppingBag size={17} />
         </Link>
@@ -78,26 +96,26 @@ function ProductCard({ product, wishlist, toggleWishlist, onAddToCart }) {
       <div className="p-4 sm:p-5">
         <div className="mb-2 flex items-center justify-between gap-2">
           <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#A17C32]">
-            {product.category}
+            {categoryName}
           </span>
 
           <div className="flex items-center gap-1 text-xs font-semibold text-[#6F746B]">
             <Star size={13} fill="#D9A441" stroke="#D9A441" />
             {product.rating}
             <span className="text-[#A5A69F]">
-              ({product.reviews})
+              {t("products.card.reviews", { count: product.reviews })}
             </span>
           </div>
         </div>
 
         <Link to={`/product/${product.slug}`}>
           <h3 className="line-clamp-2 min-h-12 text-sm font-bold leading-6 text-[#242820] transition hover:text-[#254D32] sm:text-base">
-            {product.name}
+            {productName}
           </h3>
         </Link>
 
         <p className="mt-1 text-xs text-[#8A8D84]">
-          {product.weight}
+          {weight}
         </p>
 
         <div className="mt-4 flex items-center justify-between gap-2">
@@ -121,7 +139,9 @@ function ProductCard({ product, wishlist, toggleWishlist, onAddToCart }) {
           className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#254D32] px-4 py-3 text-xs font-bold text-white transition hover:bg-[#193B26] disabled:cursor-not-allowed disabled:bg-gray-400 sm:text-sm"
         >
           <ShoppingBag size={16} />
-          {product.inStock ? "Add to Cart" : "Out of Stock"}
+          {product.inStock
+            ? t("products.card.addToCart")
+            : t("products.card.outOfStock")}
         </button>
       </div>
     </article>
@@ -140,11 +160,15 @@ function FilterContent({
   inStockOnly,
   setInStockOnly,
   clearFilters,
+  language,
+  t,
 }) {
   return (
     <div className="space-y-7">
       <div>
-        <h3 className="mb-4 text-sm font-extrabold">Categories</h3>
+        <h3 className="mb-4 text-sm font-extrabold">
+          {t("products.categoriesTitle")}
+        </h3>
 
         <div className="space-y-3">
           {categories.map((category) => {
@@ -168,7 +192,7 @@ function FilterContent({
                   {selectedCategory === category.id && (
                     <Check size={15} />
                   )}
-                  {category.name}
+                  {getCategoryName(category, language)}
                 </span>
                 <span className="text-xs text-[#A5A69F]">{count}</span>
               </button>
@@ -180,21 +204,27 @@ function FilterContent({
       <div className="h-px bg-[#E8E4D9]" />
 
       <div>
-        <h3 className="mb-4 text-sm font-extrabold">Price Range</h3>
+        <h3 className="mb-4 text-sm font-extrabold">
+          {t("products.priceRange")}
+        </h3>
 
         <div className="flex items-center gap-3">
           <div className="flex-1 rounded-lg border border-[#E8E4D9] px-3 py-2">
-            <span className="text-[10px] text-[#8A8D84]">Minimum</span>
+            <span className="text-[10px] text-[#8A8D84]">
+              {t("products.minimum")}
+            </span>
             <p className="text-sm font-bold">{formatPrice(minPrice)}</p>
           </div>
           <div className="flex-1 rounded-lg border border-[#E8E4D9] px-3 py-2">
-            <span className="text-[10px] text-[#8A8D84]">Maximum</span>
+            <span className="text-[10px] text-[#8A8D84]">
+              {t("products.maximum")}
+            </span>
             <p className="text-sm font-bold">{formatPrice(maxPrice)}</p>
           </div>
         </div>
 
         <label className="mt-5 block text-xs text-[#6F746B]">
-          Minimum price
+          {t("products.minimumPrice")}
         </label>
         <input
           type="range"
@@ -209,7 +239,7 @@ function FilterContent({
         />
 
         <label className="mt-3 block text-xs text-[#6F746B]">
-          Maximum price
+          {t("products.maximumPrice")}
         </label>
         <input
           type="range"
@@ -227,7 +257,9 @@ function FilterContent({
       <div className="h-px bg-[#E8E4D9]" />
 
       <div>
-        <h3 className="mb-4 text-sm font-extrabold">Customer Rating</h3>
+        <h3 className="mb-4 text-sm font-extrabold">
+          {t("products.customerRating")}
+        </h3>
 
         {[4, 3, 2, 1].map((value) => (
           <button
@@ -250,7 +282,7 @@ function FilterContent({
                 />
               ))}
             </span>
-            & Up
+            {t("products.andUp")}
             {rating === value && <Check size={14} />}
           </button>
         ))}
@@ -259,7 +291,7 @@ function FilterContent({
       <div className="h-px bg-[#E8E4D9]" />
 
       <label className="flex cursor-pointer items-center justify-between text-sm">
-        <span className="font-semibold">In Stock Only</span>
+        <span className="font-semibold">{t("products.inStockOnly")}</span>
         <input
           type="checkbox"
           checked={inStockOnly}
@@ -274,7 +306,7 @@ function FilterContent({
         className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#E8E4D9] py-3 text-sm font-bold text-[#254D32] transition hover:bg-[#E8F0E8]"
       >
         <RotateCcw size={15} />
-        Clear All Filters
+        {t("products.clearAllFilters")}
       </button>
     </div>
   );
@@ -282,6 +314,7 @@ function FilterContent({
 
 export default function Products() {
   const navigate = useNavigate();
+  const { t, language } = useLanguage();
 
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -323,11 +356,24 @@ export default function Products() {
   };
 
   const filteredProducts = useMemo(() => {
+    const searchLower = search.toLowerCase().trim();
+
     let result = products.filter((product) => {
+      const nameEn = (product.name_en || product.name || "").toLowerCase();
+      const nameBn = (product.name_bn || "").toLowerCase();
+      const descEn = (product.description_en || product.description || "").toLowerCase();
+      const descBn = (product.description_bn || "").toLowerCase();
+      const catEn = (product.category_en || product.category || "").toLowerCase();
+      const catBn = (product.category_bn || "").toLowerCase();
+
       const matchesSearch =
-        product.name.toLowerCase().includes(search.toLowerCase()) ||
-        product.description.toLowerCase().includes(search.toLowerCase()) ||
-        product.category.toLowerCase().includes(search.toLowerCase());
+        !searchLower ||
+        nameEn.includes(searchLower) ||
+        nameBn.includes(searchLower) ||
+        descEn.includes(searchLower) ||
+        descBn.includes(searchLower) ||
+        catEn.includes(searchLower) ||
+        catBn.includes(searchLower);
 
       const matchesCategory =
         selectedCategory === "all" ||
@@ -381,7 +427,8 @@ export default function Products() {
 
   const handleAddToCart = (product) => {
     addToCart(product);
-    setCartMessage(`${product.name} added to your cart!`);
+    const productName = getProductName(product, language);
+    setCartMessage(t("products.toastAdded", { name: productName }));
 
     window.setTimeout(() => setCartMessage(""), 2500);
   };
@@ -398,6 +445,8 @@ export default function Products() {
     inStockOnly,
     setInStockOnly,
     clearFilters,
+    language,
+    t,
   };
 
   return (
@@ -410,17 +459,18 @@ export default function Products() {
           <div className="max-w-2xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#254D32]/15 bg-white/60 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#254D32]">
               <Sparkles size={15} />
-              Explore our collection
+              {t("products.hero.badge")}
             </div>
 
-            <h1 className="font-['DM_Serif_Display'] text-4xl leading-tight sm:text-6xl">
-              Goodness for Your
-              <span className="block text-[#254D32]">Everyday Kitchen.</span>
+            <h1 className="font-heading text-4xl leading-tight sm:text-6xl">
+              {t("products.hero.titleStart")}
+              <span className="block text-[#254D32]">
+                {t("products.hero.titleHighlight")}
+              </span>
             </h1>
 
             <p className="mt-5 max-w-xl text-sm leading-7 text-[#6F746B] sm:text-base">
-              Discover carefully selected ghee, oils, honey and spices.
-              Bring authentic flavor and everyday goodness to your table.
+              {t("products.hero.description")}
             </p>
           </div>
 
@@ -436,7 +486,7 @@ export default function Products() {
                 }}
                 className="rounded-full border border-[#254D32]/20 bg-white/70 px-5 py-2.5 text-xs font-bold text-[#254D32] transition hover:bg-[#254D32] hover:text-white"
               >
-                {category.name}
+                {getCategoryName(category, language)}
               </button>
             ))}
           </div>
@@ -452,16 +502,18 @@ export default function Products() {
         <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#B48A35]">
-              Shop our collection
+              {t("products.section.tagline")}
             </p>
-            <h2 className="mt-2 font-['DM_Serif_Display'] text-3xl sm:text-4xl">
-              Find Your Favorites
+            <h2 className="mt-2 font-heading text-3xl sm:text-4xl">
+              {t("products.section.title")}
             </h2>
           </div>
 
           <p className="text-sm text-[#6F746B]">
-            Showing <strong className="text-[#254D32]">{filteredProducts.length}</strong>{" "}
-            of {products.length} products
+            {t("products.section.showingCount", {
+              shown: filteredProducts.length,
+              total: products.length,
+            })}
           </p>
         </div>
 
@@ -476,14 +528,14 @@ export default function Products() {
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search ghee, honey, mustard oil, spices..."
+              placeholder={t("products.searchPlaceholder")}
               className="w-full rounded-xl border border-[#E8E4D9] bg-white py-4 pl-12 pr-4 text-sm outline-none transition placeholder:text-[#A5A69F] focus:border-[#254D32] focus:ring-4 focus:ring-[#254D32]/10"
             />
             {search && (
               <button
                 onClick={() => setSearch("")}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8A8D84]"
-                aria-label="Clear search"
+                aria-label={t("products.clearSearch")}
               >
                 <X size={17} />
               </button>
@@ -496,7 +548,7 @@ export default function Products() {
               className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-[#E8E4D9] bg-white px-5 py-4 text-sm font-bold text-[#254D32] lg:hidden"
             >
               <SlidersHorizontal size={17} />
-              Filters
+              {t("products.filterButton")}
             </button>
 
             <div className="relative flex-1 lg:flex-none">
@@ -509,12 +561,12 @@ export default function Products() {
                 onChange={(e) => setSortBy(e.target.value)}
                 className="w-full appearance-none rounded-xl border border-[#E8E4D9] bg-white py-4 pl-11 pr-10 text-sm font-semibold outline-none focus:border-[#254D32] sm:min-w-52"
               >
-                <option value="featured">Featured</option>
-                <option value="popular">Most Popular</option>
-                <option value="newest">Newest Arrivals</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="rating">Top Rated</option>
+                <option value="featured">{t("products.sort.featured")}</option>
+                <option value="popular">{t("products.sort.popular")}</option>
+                <option value="newest">{t("products.sort.newest")}</option>
+                <option value="price-low">{t("products.sort.priceLow")}</option>
+                <option value="price-high">{t("products.sort.priceHigh")}</option>
+                <option value="rating">{t("products.sort.rating")}</option>
               </select>
               <ChevronDown
                 size={16}
@@ -536,7 +588,7 @@ export default function Products() {
                   : "border border-[#E8E4D9] bg-white text-[#6F746B] hover:border-[#254D32] hover:text-[#254D32]"
               }`}
             >
-              {category.name}
+              {getCategoryName(category, language)}
             </button>
           ))}
         </div>
@@ -547,7 +599,7 @@ export default function Products() {
             <div className="mb-6 flex items-center justify-between">
               <h3 className="flex items-center gap-2 font-extrabold">
                 <SlidersHorizontal size={17} />
-                Filters
+                {t("products.filterButton")}
               </h3>
             </div>
 
@@ -565,6 +617,8 @@ export default function Products() {
                     wishlist={wishlist}
                     toggleWishlist={toggleWishlist}
                     onAddToCart={handleAddToCart}
+                    language={language}
+                    t={t}
                   />
                 ))}
               </div>
@@ -573,18 +627,17 @@ export default function Products() {
                 <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#E8F0E8] text-[#254D32]">
                   <Package size={28} />
                 </div>
-                <h3 className="font-['DM_Serif_Display'] text-2xl">
-                  No Products Found
+                <h3 className="font-heading text-2xl">
+                  {t("products.empty.title")}
                 </h3>
                 <p className="mt-2 max-w-sm text-sm leading-6 text-[#6F746B]">
-                  We couldn't find products matching your search or filters.
-                  Try changing your selection.
+                  {t("products.empty.description")}
                 </p>
                 <button
                   onClick={clearFilters}
                   className="mt-6 rounded-full bg-[#254D32] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#193B26]"
                 >
-                  Clear Filters
+                  {t("products.empty.clearButton")}
                 </button>
               </div>
             )}
@@ -604,7 +657,9 @@ export default function Products() {
 
           <div className="absolute bottom-0 left-0 right-0 max-h-[85vh] overflow-y-auto rounded-t-3xl bg-[#FFF9EE] p-6 shadow-2xl">
             <div className="mb-7 flex items-center justify-between">
-              <h2 className="text-xl font-extrabold">Filter Products</h2>
+              <h2 className="text-xl font-extrabold">
+                {t("products.filterTitle")}
+              </h2>
               <button
                 onClick={() => setShowFilters(false)}
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#254D32]"
@@ -620,7 +675,9 @@ export default function Products() {
               onClick={() => setShowFilters(false)}
               className="mt-6 w-full rounded-xl bg-[#254D32] py-4 text-sm font-bold text-white"
             >
-              Show {filteredProducts.length} Products
+              {t("products.showProductsBtn", {
+                count: filteredProducts.length,
+              })}
             </button>
           </div>
         </div>
@@ -635,7 +692,7 @@ export default function Products() {
             onClick={() => navigate("/cart")}
             className="shrink-0 font-bold text-[#F5E7C5] underline underline-offset-4"
           >
-            View Cart
+            {t("products.viewCart")}
           </button>
         </div>
       )}

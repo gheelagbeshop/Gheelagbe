@@ -1,25 +1,27 @@
+import { useLanguage } from "../../context/LanguageContext";
 import NavBar from "./NavBar";
 
-
 const Header = () => {
+  const { t } = useLanguage();
+
   return (
     <header className="sticky top-0 z-50 w-full">
       {/* Top Announcement Bar */}
       <div className="bg-primary text-white">
         <div className="container-custom flex min-h-9 items-center justify-between gap-3 text-xs">
           <p className="hidden sm:block">
-            Bringing Nature's Goodness to Your Home
+            {t("header.announcement.tagline")}
           </p>
 
           <p className="mx-auto sm:mx-0">
-            Free delivery on orders over ৳2,000
+            {t("header.announcement.freeDelivery")}
           </p>
 
           <a
             href="tel:+8801644945406"
             className="hidden transition-colors hover:text-accent sm:block"
           >
-            Need Help? +8801644-945406
+            {t("header.announcement.needHelp")}
           </a>
         </div>
       </div>
