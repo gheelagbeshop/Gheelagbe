@@ -8,7 +8,9 @@ const SEO = ({
   title = "GheeLagbe | খাঁটি ও প্রাকৃতিক খাদ্যসামগ্রী",
   description = "GheeLagbe থেকে সংগ্রহ করুন খাঁটি ঘি, সরিষার তেল, প্রাকৃতিক গুড় এবং মানসম্মত দেশি খাদ্যসামগ্রী।",
   canonical,
+  image = `${SITE_URL}/gheelagbeicon.png`,
   noindex = false,
+  structuredData,
 }) => {
   const location = useLocation();
 
@@ -32,31 +34,65 @@ const SEO = ({
     };
 
     setMeta("name", "description", description);
-    setMeta("name", "robots", noindex ? "noindex, nofollow" : "index, follow");
+    setMeta("name", "robots", noindex ? "noindex, follow" : "index, follow");
 
-    setMeta("property", "og:type", "website");
+    // Open Graph
+    setMeta("property", "og:type", structuredData?.["@type"] === "Product" ? "product" : "website");
     setMeta("property", "og:site_name", "GheeLagbe");
     setMeta("property", "og:title", title);
     setMeta("property", "og:description", description);
     setMeta("property", "og:url", pageUrl);
+    setMeta("property", "og:image", image);
     setMeta("property", "og:locale", "bn_BD");
 
-    setMeta("name", "twitter:card", "summary");
+    // Twitter
+    setMeta("name", "twitter:card", "summary_large_image");
     setMeta("name", "twitter:title", title);
     setMeta("name", "twitter:description", description);
+    setMeta("name", "twitter:image", image);
 
+    // Canonical URL
     let canonicalElement = document.head.querySelector(
       'link[rel="canonical"]'
     );
 
     if (!canonicalElement) {
       canonicalElement = document.createElement("link");
-      canonicalElement.setAttribute("rel", "canonical");
+      canonicalElement.rel = "canonical";
       document.head.appendChild(canonicalElement);
     }
 
-    canonicalElement.setAttribute("href", pageUrl);
-  }, [title, description, canonical, noindex, location.pathname]);
+    canonicalElement.href = pageUrl;
+
+    // Structured Data
+    const schemaId = "gheelagbe-jsonld";
+    let schemaElement = document.getElementById(schemaId);
+
+    if (structuredData) {
+      if (!schemaElement) {
+        schemaElement = document.createElement("script");
+        schemaElement.id = schemaId;
+        schemaElement.type = "application/ld+json";
+        document.head.appendChild(schemaElement);
+      }
+
+      schemaElement.textContent = JSON.stringify(structuredData);
+    } else if (schemaElement) {
+      schemaElement.remove();
+    }
+
+    return () => {
+      // The next route will update or remove the metadata and schema.
+    };
+  }, [
+    title,
+    description,
+    canonical,
+    image,
+    noindex,
+    structuredData,
+    location.pathname,
+  ]);
 
   return null;
 };
