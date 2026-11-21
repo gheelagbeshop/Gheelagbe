@@ -12,6 +12,7 @@ import NotFoundPage from "./Pages/NotFoundPage";
 import CheckoutPage from "./Pages/CheckoutPage";
 import OrderSuccessPage from "./Pages/OrderSuccessPage";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ export default function App() {
     <LanguageProvider>
       <RouterProvider router={router} />
       <Analytics />
+      <SpeedInsights />
     </LanguageProvider>
   );
 }
