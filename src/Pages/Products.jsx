@@ -30,10 +30,16 @@ import { useLanguage } from "../context/LanguageContext";
 
 const MAX_PRICE = Math.max(...products.map((p) => p.price));
 
-const formatPrice = (price) =>
-  `৳${price.toLocaleString("en-BD")}`;
+const formatPrice = (price) => `৳${price.toLocaleString("en-BD")}`;
 
-function ProductCard({ product, wishlist, toggleWishlist, onAddToCart, language, t }) {
+function ProductCard({
+  product,
+  wishlist,
+  toggleWishlist,
+  onAddToCart,
+  language,
+  t,
+}) {
   const isWishlisted = wishlist.includes(product.id);
   const badge = getProductBadge(product, language);
   const productName = getProductName(product, language);
@@ -62,8 +68,9 @@ function ProductCard({ product, wishlist, toggleWishlist, onAddToCart, language,
           <span className="absolute bottom-3 left-3 rounded-full bg-[#D9A441] px-3 py-1 text-[10px] font-bold text-[#242820]">
             {t("products.card.save")}{" "}
             {Math.round(
-              ((product.oldPrice - product.price) / product.oldPrice) * 100
-            )}%
+              ((product.oldPrice - product.price) / product.oldPrice) * 100,
+            )}
+            %
           </span>
         )}
 
@@ -114,9 +121,7 @@ function ProductCard({ product, wishlist, toggleWishlist, onAddToCart, language,
           </h3>
         </Link>
 
-        <p className="mt-1 text-xs text-[#8A8D84]">
-          {weight}
-        </p>
+        <p className="mt-1 text-xs text-[#8A8D84]">{weight}</p>
 
         <div className="mt-4 flex items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-2">
@@ -189,9 +194,7 @@ function FilterContent({
                 }`}
               >
                 <span className="flex items-center gap-2">
-                  {selectedCategory === category.id && (
-                    <Check size={15} />
-                  )}
+                  {selectedCategory === category.id && <Check size={15} />}
                   {getCategoryName(category, language)}
                 </span>
                 <span className="text-xs text-[#A5A69F]">{count}</span>
@@ -267,9 +270,7 @@ function FilterContent({
             type="button"
             onClick={() => setRating(rating === value ? 0 : value)}
             className={`mb-3 flex w-full items-center gap-2 text-sm ${
-              rating === value
-                ? "font-bold text-[#254D32]"
-                : "text-[#6F746B]"
+              rating === value ? "font-bold text-[#254D32]" : "text-[#6F746B]"
             }`}
           >
             <span className="flex items-center gap-1">
@@ -341,7 +342,7 @@ export default function Products() {
     setWishlist((current) =>
       current.includes(id)
         ? current.filter((item) => item !== id)
-        : [...current, id]
+        : [...current, id],
     );
   };
 
@@ -361,9 +362,17 @@ export default function Products() {
     let result = products.filter((product) => {
       const nameEn = (product.name_en || product.name || "").toLowerCase();
       const nameBn = (product.name_bn || "").toLowerCase();
-      const descEn = (product.description_en || product.description || "").toLowerCase();
+      const descEn = (
+        product.description_en ||
+        product.description ||
+        ""
+      ).toLowerCase();
       const descBn = (product.description_bn || "").toLowerCase();
-      const catEn = (product.category_en || product.category || "").toLowerCase();
+      const catEn = (
+        product.category_en ||
+        product.category ||
+        ""
+      ).toLowerCase();
       const catBn = (product.category_bn || "").toLowerCase();
 
       const matchesSearch =
@@ -376,8 +385,7 @@ export default function Products() {
         catBn.includes(searchLower);
 
       const matchesCategory =
-        selectedCategory === "all" ||
-        product.category === selectedCategory;
+        selectedCategory === "all" || product.category === selectedCategory;
 
       const matchesPrice =
         product.price >= minPrice && product.price <= maxPrice;
@@ -448,47 +456,187 @@ export default function Products() {
     language,
     t,
   };
+  const heroProducts = products.slice(0, 3);
 
   return (
     <main className="min-h-screen bg-[#FFF9EE] text-[#242820]">
       {/* PAGE HERO */}
-      <section className="relative overflow-hidden bg-[#E8F0E8] px-5 py-14 sm:px-8 sm:py-20 lg:px-16">
-        <div className="absolute -right-20 -top-32 h-80 w-80 rounded-full bg-[#D9A441]/15 blur-3xl" />
+      <section className="relative isolate overflow-hidden bg-[#E8F0E8]">
+        {/* Background decoration */}
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-[#254D32]/5 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-40 left-1/4 h-80 w-80 rounded-full bg-[#D9A441]/10 blur-3xl" />
 
-        <div className="relative mx-auto max-w-7xl">
-          <div className="max-w-2xl">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#254D32]/15 bg-white/60 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#254D32]">
-              <Sparkles size={15} />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-2 lg:gap-8 lg:px-8 lg:py-16">
+          {/* LEFT CONTENT */}
+          <div className="relative z-10 max-w-xl">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#254D32]/15 bg-white/70 px-4 py-2 text-xs font-bold text-[#254D32] shadow-sm backdrop-blur">
+              <Sparkles size={15} className="text-[#B48A35]" />
               {t("products.hero.badge")}
             </div>
 
-            <h1 className="font-heading text-4xl leading-tight sm:text-6xl">
+            <h1 className="font-heading text-4xl leading-[1.2] tracking-tight text-[#242820] sm:text-5xl lg:text-6xl">
               {t("products.hero.titleStart")}
-              <span className="block text-[#254D32]">
+              <span className="mt-1 block text-[#254D32]">
                 {t("products.hero.titleHighlight")}
               </span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-sm leading-7 text-[#6F746B] sm:text-base">
+            <p className="mt-6 max-w-lg text-sm leading-8 text-[#6F746B] sm:text-base">
               {t("products.hero.description")}
             </p>
+
+            {/* Category shortcuts */}
+            <div className="mt-8 flex flex-wrap gap-2.5">
+              {categories.slice(1).map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => {
+                    setSelectedCategory(category.id);
+                    document.getElementById("shop-products")?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }}
+                  className="rounded-full border border-[#254D32]/20 bg-white/75 px-4 py-2.5 text-xs font-bold text-[#254D32] transition-all duration-300 hover:-translate-y-1 hover:bg-[#254D32] hover:text-white hover:shadow-lg sm:px-5"
+                >
+                  {getCategoryName(category, language)}
+                </button>
+              ))}
+            </div>
+
+            {/* Trust highlights */}
+            <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-[#254D32]/10 pt-6">
+              <div>
+                <p className="text-xl font-extrabold text-[#254D32]">100%</p>
+                <p className="text-[11px] text-[#6F746B]">
+                  {language === "bn" ? "প্রাকৃতিক পণ্য" : "Natural Products"}
+                </p>
+              </div>
+
+              <div className="h-9 w-px bg-[#254D32]/15" />
+
+              <div>
+                <p className="text-xl font-extrabold text-[#254D32]">৳120</p>
+                <p className="text-[11px] text-[#6F746B]">
+                  {language === "bn"
+                    ? "নির্দিষ্ট ডেলিভারি চার্জ"
+                    : "Fixed Delivery Charge"}
+                </p>
+              </div>
+
+              <div className="h-9 w-px bg-[#254D32]/15" />
+
+              <div>
+                <p className="text-xl font-extrabold text-[#254D32]">COD</p>
+                <p className="text-[11px] text-[#6F746B]">
+                  {language === "bn" ? "ক্যাশ অন ডেলিভারি" : "Cash on Delivery"}
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            {categories.slice(1).map((category) => (
-              <button
-                key={category.id}
-                onClick={() => {
-                  setSelectedCategory(category.id);
-                  document.getElementById("shop-products")?.scrollIntoView({
-                    behavior: "smooth",
-                  });
-                }}
-                className="rounded-full border border-[#254D32]/20 bg-white/70 px-5 py-2.5 text-xs font-bold text-[#254D32] transition hover:bg-[#254D32] hover:text-white"
-              >
-                {getCategoryName(category, language)}
-              </button>
-            ))}
+          {/* RIGHT PRODUCT SHOWCASE */}
+          <div className="relative mx-auto w-full max-w-[550px] lg:ml-auto">
+            {/* Decorative circle */}
+            <div className="absolute left-1/2 top-1/2 aspect-square w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#254D32]/10 bg-[#254D32]/[0.025]" />
+
+            <div className="relative grid grid-cols-2 items-center gap-3 sm:gap-5">
+              {/* Main featured product */}
+              {heroProducts[0] && (
+                <Link
+                  to={`/product/${heroProducts[0].slug}`}
+                  className="group relative col-span-2 overflow-hidden rounded-[28px] bg-white shadow-xl shadow-[#254D32]/10 transition duration-500 hover:-translate-y-1 sm:col-span-1 sm:row-span-2"
+                >
+                  <div className="aspect-[4/5] overflow-hidden sm:aspect-[3/5]">
+                    <img
+                      src={heroProducts[0].image}
+                      alt={getProductName(heroProducts[0], language)}
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                    />
+                  </div>
+
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-5 pt-20 text-white">
+                    <span className="mb-2 inline-block rounded-full bg-[#D9A441] px-3 py-1 text-[10px] font-bold text-[#242820]">
+                      {language === "bn" ? "জনপ্রিয় পণ্য" : "POPULAR PRODUCT"}
+                    </span>
+
+                    <h3 className="text-lg font-bold">
+                      {getProductName(heroProducts[0], language)}
+                    </h3>
+
+                    <p className="mt-1 text-sm font-extrabold text-[#F5E7C5]">
+                      {formatPrice(heroProducts[0].price)}
+                    </p>
+                  </div>
+                </Link>
+              )}
+
+              {/* Secondary product */}
+              {heroProducts[1] && (
+                <Link
+                  to={`/product/${heroProducts[1].slug}`}
+                  className="group relative overflow-hidden rounded-[24px] bg-white shadow-lg shadow-[#254D32]/10 transition duration-500 hover:-translate-y-1"
+                >
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img
+                      src={heroProducts[1].image}
+                      alt={getProductName(heroProducts[1], language)}
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                    />
+                  </div>
+
+                  <div className="p-3 sm:p-4">
+                    <h3 className="line-clamp-1 text-sm font-bold text-[#242820]">
+                      {getProductName(heroProducts[1], language)}
+                    </h3>
+                    <p className="mt-1 text-sm font-extrabold text-[#254D32]">
+                      {formatPrice(heroProducts[1].price)}
+                    </p>
+                  </div>
+                </Link>
+              )}
+
+              {/* Third product */}
+              {heroProducts[2] && (
+                <Link
+                  to={`/product/${heroProducts[2].slug}`}
+                  className="group relative overflow-hidden rounded-[24px] bg-white shadow-lg shadow-[#254D32]/10 transition duration-500 hover:-translate-y-1"
+                >
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img
+                      src={heroProducts[2].image}
+                      alt={getProductName(heroProducts[2], language)}
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                    />
+                  </div>
+
+                  <div className="p-3 sm:p-4">
+                    <h3 className="line-clamp-1 text-sm font-bold text-[#242820]">
+                      {getProductName(heroProducts[2], language)}
+                    </h3>
+                    <p className="mt-1 text-sm font-extrabold text-[#254D32]">
+                      {formatPrice(heroProducts[2].price)}
+                    </p>
+                  </div>
+                </Link>
+              )}
+            </div>
+
+            {/* Floating quality badge */}
+            <div className="absolute -right-2 top-5 z-10 flex items-center gap-2 rounded-2xl border border-[#E8E4D9] bg-white/95 px-3 py-2.5 shadow-xl backdrop-blur sm:-right-5 sm:px-4 sm:py-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E8F0E8] text-[#254D32]">
+                <Sparkles size={17} />
+              </div>
+              <div>
+                <p className="text-xs font-extrabold text-[#254D32]">
+                  {language === "bn" ? "বিশুদ্ধ ও প্রাকৃতিক" : "Pure & Natural"}
+                </p>
+                <p className="text-[10px] text-[#8A8D84]">
+                  {language === "bn"
+                    ? "আপনার পরিবারের জন্য"
+                    : "Made for your family"}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -565,7 +713,9 @@ export default function Products() {
                 <option value="popular">{t("products.sort.popular")}</option>
                 <option value="newest">{t("products.sort.newest")}</option>
                 <option value="price-low">{t("products.sort.priceLow")}</option>
-                <option value="price-high">{t("products.sort.priceHigh")}</option>
+                <option value="price-high">
+                  {t("products.sort.priceHigh")}
+                </option>
                 <option value="rating">{t("products.sort.rating")}</option>
               </select>
               <ChevronDown
