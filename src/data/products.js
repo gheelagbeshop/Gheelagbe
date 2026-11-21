@@ -1,9 +1,14 @@
+
 export const categories = [
   { id: "all", name: "All Products", name_bn: "সকল পণ্য", name_en: "All Products" },
   { id: "ghee", name: "Ghee", name_bn: "খাঁটি ঘি", name_en: "Ghee" },
   { id: "oil", name: "Oil", name_bn: "সরিষার তেল", name_en: "Oil" },
   { id: "honey", name: "Honey", name_bn: "প্রাকৃতিক মধু", name_en: "Honey" },
   { id: "spices", name: "Spices", name_bn: "খাঁটি মসলা", name_en: "Spices" },
+  { id: "gur", name: "Jaggery", name_bn: "গুড়", name_en: "Jaggery" },
+  { id: "ata", name: "Flour", name_bn: "আটা", name_en: "Flour" },
+  { id: "chal", name: "Rice", name_bn: "চাল", name_en: "Rice" },
+  { id: "dal", name: "Lentils", name_bn: "ডাল", name_en: "Lentils" },
 ];
 
 export const products = [
@@ -28,32 +33,13 @@ export const products = [
     isNew: false,
     inStock: true,
     popularity: 98,
-    description:
-      "Rich, aromatic and naturally prepared pure cow ghee. Perfect for traditional cooking, desserts and everyday meals.",
-    description_bn:
-      "ঐতিহ্যবাহী পদ্ধতিতে তৈরি খাঁটি দানাদার গাওয়া ঘি। চমৎকার সুবাস ও অতুলনীয় স্বাদ, যা আপনার প্রতিদিনের খাবারকে করবে আরও পুষ্টিকর ও সুস্বাদু।",
-    description_en:
-      "Rich, aromatic and naturally prepared pure cow ghee. Perfect for traditional cooking, desserts and everyday meals.",
-    image:
-      "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=900&q=85",
-    features: [
-      "Rich natural aroma",
-      "Traditional preparation",
-      "No artificial flavor",
-      "Perfect for everyday cooking",
-    ],
-    features_bn: [
-      "খাঁটি প্রাকৃতিক সুবাস",
-      "ঐতিহ্যবাহী রন্ধনপদ্ধতি",
-      "কোনো কৃত্রিম রং বা ফ্লেভার নেই",
-      "দৈনন্দিন রান্নার জন্য আদর্শ",
-    ],
-    features_en: [
-      "Rich natural aroma",
-      "Traditional preparation",
-      "No artificial flavor",
-      "Perfect for everyday cooking",
-    ],
+    description: "Rich, aromatic and naturally prepared pure cow ghee. Perfect for traditional cooking, desserts and everyday meals.",
+    description_bn: "ঐতিহ্যবাহী পদ্ধতিতে তৈরি খাঁটি দানাদার গাওয়া ঘি। চমৎকার সুবাস ও অতুলনীয় স্বাদ, যা আপনার প্রতিদিনের খাবারকে করবে আরও পুষ্টিকর ও সুস্বাদু।",
+    description_en: "Rich, aromatic and naturally prepared pure cow ghee. Perfect for traditional cooking, desserts and everyday meals.",
+    image: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=900&q=85",
+    features: ["Rich natural aroma", "Traditional preparation", "No artificial flavor", "Perfect for everyday cooking"],
+    features_bn: ["খাঁটি প্রাকৃতিক সুবাস", "ঐতিহ্যবাহী রন্ধনপদ্ধতি", "কোনো কৃত্রিম রং বা ফ্লেভার নেই", "দৈনন্দিন রান্নার জন্য আদর্শ"],
+    features_en: ["Rich natural aroma", "Traditional preparation", "No artificial flavor", "Perfect for everyday cooking"],
   },
   {
     id: 2,
@@ -76,32 +62,13 @@ export const products = [
     isNew: false,
     inStock: true,
     popularity: 90,
-    description:
-      "Traditional buffalo ghee with a delicious flavor and creamy texture for your favorite recipes.",
-    description_bn:
-      "ঘন ও সুস্বাদু ঐতিহ্যবাহী মহিষের ঘি। চমৎকার ক্রিমের মতো ঘনত্ব ও খাঁটি সুবাসে ভরপুর।",
-    description_en:
-      "Traditional buffalo ghee with a delicious flavor and creamy texture for your favorite recipes.",
-    image:
-      "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=900&q=85",
-    features: [
-      "Creamy texture",
-      "Traditional taste",
-      "Ideal for cooking",
-      "Carefully packed",
-    ],
-    features_bn: [
-      "ঘন ক্রিমি টেক্সচার",
-      "ঐতিহ্যবাহী খাঁটি স্বাদ",
-      "রান্নার জন্য উপযোগী",
-      "স্বাস্থ্যসম্মত মোড়কজাত",
-    ],
-    features_en: [
-      "Creamy texture",
-      "Traditional taste",
-      "Ideal for cooking",
-      "Carefully packed",
-    ],
+    description: "Traditional buffalo ghee with a delicious flavor and creamy texture for your favorite recipes.",
+    description_bn: "ঘন ও সুস্বাদু ঐতিহ্যবাহী মহিষের ঘি। চমৎকার ক্রিমের মতো ঘনত্ব ও খাঁটি সুবাসে ভরপুর।",
+    description_en: "Traditional buffalo ghee with a delicious flavor and creamy texture for your favorite recipes.",
+    image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=900&q=85",
+    features: ["Creamy texture", "Traditional taste", "Ideal for cooking", "Carefully packed"],
+    features_bn: ["ঘন ক্রিমি টেক্সচার", "ঐতিহ্যবাহী খাঁটি স্বাদ", "রান্নার জন্য উপযোগী", "স্বাস্থ্যসম্মত মোড়কজাত"],
+    features_en: ["Creamy texture", "Traditional taste", "Ideal for cooking", "Carefully packed"],
   },
   {
     id: 3,
@@ -124,32 +91,13 @@ export const products = [
     isNew: true,
     inStock: true,
     popularity: 88,
-    description:
-      "A family-sized pack of rich cow ghee for people who love authentic flavor in every meal.",
-    description_bn:
-      "পুরো পরিবারের স্বাস্থ্য সুরক্ষায় খাঁটি গাওয়া ঘিয়ের ১ কেজির বিশেষ সাশ্রয়ী ফ্যামিলি প্যাক।",
-    description_en:
-      "A family-sized pack of rich cow ghee for people who love authentic flavor in every meal.",
-    image:
-      "https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=900&q=85",
-    features: [
-      "Family-sized packaging",
-      "Rich aroma",
-      "Carefully packed",
-      "Great for traditional recipes",
-    ],
-    features_bn: [
-      "ফ্যামিলি সাইজ সাশ্রয়ী প্যাক",
-      "মন মাতানো ঘ্রাণ",
-      "নিরাপদ প্যাকেজিং",
-      "ঐতিহ্যবাহী রান্নার সেরা সঙ্গী",
-    ],
-    features_en: [
-      "Family-sized packaging",
-      "Rich aroma",
-      "Carefully packed",
-      "Great for traditional recipes",
-    ],
+    description: "A family-sized pack of rich cow ghee for people who love authentic flavor in every meal.",
+    description_bn: "পুরো পরিবারের স্বাস্থ্য সুরক্ষায় খাঁটি গাওয়া ঘিয়ের ১ কেজির বিশেষ সাশ্রয়ী ফ্যামিলি প্যাক।",
+    description_en: "A family-sized pack of rich cow ghee for people who love authentic flavor in every meal.",
+    image: "https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=900&q=85",
+    features: ["Family-sized packaging", "Rich aroma", "Carefully packed", "Great for traditional recipes"],
+    features_bn: ["ফ্যামিলি সাইজ সাশ্রয়ী প্যাক", "মন মাতানো ঘ্রাণ", "নিরাপদ প্যাকেজিং", "ঐতিহ্যবাহী রান্নার সেরা সঙ্গী"],
+    features_en: ["Family-sized packaging", "Rich aroma", "Carefully packed", "Great for traditional recipes"],
   },
   {
     id: 4,
@@ -172,32 +120,13 @@ export const products = [
     isNew: false,
     inStock: true,
     popularity: 95,
-    description:
-      "Traditional mustard oil with a bold aroma, ideal for authentic Bengali cooking.",
-    description_bn:
-      "কাঠের ঘানিতে ভাঙানো খাঁটি সরিষার তেল। ঝাঁঝালো খাঁটি গন্ধ ও বাঙালিয়ানা রান্নার আসল স্বাদ।",
-    description_en:
-      "Traditional mustard oil with a bold aroma, ideal for authentic Bengali cooking.",
-    image:
-      "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=900&q=85",
-    features: [
-      "Traditional mustard flavor",
-      "Bold natural aroma",
-      "Suitable for Bengali recipes",
-      "Secure packaging",
-    ],
-    features_bn: [
-      "ঐতিহ্যবাহী সরিষার ঝাঁঝ",
-      "প্রাকৃতিক গুণাগুণ অক্ষুণ্ণ",
-      "বাঙালি রান্নার জন্য অপরিহার্য",
-      "নিরাপদ বোতলজাত",
-    ],
-    features_en: [
-      "Traditional mustard flavor",
-      "Bold natural aroma",
-      "Suitable for Bengali recipes",
-      "Secure packaging",
-    ],
+    description: "Traditional mustard oil with a bold aroma, ideal for authentic Bengali cooking.",
+    description_bn: "কাঠের ঘানিতে ভাঙানো খাঁটি সরিষার তেল। ঝাঁঝালো খাঁটি গন্ধ ও বাঙালিয়ানা রান্নার আসল স্বাদ।",
+    description_en: "Traditional mustard oil with a bold aroma, ideal for authentic Bengali cooking.",
+    image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=900&q=85",
+    features: ["Traditional mustard flavor", "Bold natural aroma", "Suitable for Bengali recipes", "Secure packaging"],
+    features_bn: ["ঐতিহ্যবাহী সরিষার ঝাঁঝ", "প্রাকৃতিক গুণাগুণ অক্ষুণ্ণ", "বাঙালি রান্নার জন্য অপরিহার্য", "নিরাপদ বোতলজাত"],
+    features_en: ["Traditional mustard flavor", "Bold natural aroma", "Suitable for Bengali recipes", "Secure packaging"],
   },
   {
     id: 5,
@@ -220,32 +149,13 @@ export const products = [
     isNew: true,
     inStock: true,
     popularity: 78,
-    description:
-      "A convenient larger pack of flavorful mustard oil for everyday family cooking.",
-    description_bn:
-      "প্রতিদিনের পারিবারিক রান্নার জন্য সুবিধাজনক খাঁটি সরিষার তেলের সাশ্রয়ী ২ লিটার বোতল।",
-    description_en:
-      "A convenient larger pack of flavorful mustard oil for everyday family cooking.",
-    image:
-      "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=900&q=85",
-    features: [
-      "Convenient family pack",
-      "Distinctive mustard aroma",
-      "Everyday cooking",
-      "Secure packaging",
-    ],
-    features_bn: [
-      "সুবিধাজনক ফ্যামিলি প্যাক",
-      "অনন্য সরিষার সুবাস",
-      "প্রতিদিনের রান্নায় উপযোগী",
-      "নিরাপদ মোড়কজাত",
-    ],
-    features_en: [
-      "Convenient family pack",
-      "Distinctive mustard aroma",
-      "Everyday cooking",
-      "Secure packaging",
-    ],
+    description: "A convenient larger pack of flavorful mustard oil for everyday family cooking.",
+    description_bn: "প্রতিদিনের পারিবারিক রান্নার জন্য সুবিধাজনক খাঁটি সরিষার তেলের সাশ্রয়ী ২ লিটার বোতল।",
+    description_en: "A convenient larger pack of flavorful mustard oil for everyday family cooking.",
+    image: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=900&q=85",
+    features: ["Convenient family pack", "Distinctive mustard aroma", "Everyday cooking", "Secure packaging"],
+    features_bn: ["সুবিধাজনক ফ্যামিলি প্যাক", "অনন্য সরিষার সুবাস", "প্রতিদিনের রান্নায় উপযোগী", "নিরাপদ মোড়কজাত"],
+    features_en: ["Convenient family pack", "Distinctive mustard aroma", "Everyday cooking", "Secure packaging"],
   },
   {
     id: 6,
@@ -268,32 +178,13 @@ export const products = [
     isNew: false,
     inStock: true,
     popularity: 97,
-    description:
-      "Naturally sweet mustard flower honey with a distinctive floral character.",
-    description_bn:
-      "প্রাকৃতিক ফুলের খাঁটি মিষ্টিতে ভরা সরিষা ফুলের মধু। শরীরের রোগ প্রতিরোধ ক্ষমতা বৃদ্ধিতে সহায়ক।",
-    description_en:
-      "Naturally sweet mustard flower honey with a distinctive floral character.",
-    image:
-      "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=900&q=85",
-    features: [
-      "Floral taste",
-      "Naturally sweet",
-      "Versatile use",
-      "Carefully packed",
-    ],
-    features_bn: [
-      "প্রাকৃতিক ফুলের মিষ্টতা",
-      "প্রাকৃতিকভাবে মিষ্টি",
-      "বহুমুখী ব্যবহারোপযোগী",
-      "সুরক্ষিত প্যাকেজিং",
-    ],
-    features_en: [
-      "Floral taste",
-      "Naturally sweet",
-      "Versatile use",
-      "Carefully packed",
-    ],
+    description: "Naturally sweet mustard flower honey with a distinctive floral character.",
+    description_bn: "প্রাকৃতিক ফুলের খাঁটি মিষ্টিতে ভরা সরিষা ফুলের মধু। শরীরের রোগ প্রতিরোধ ক্ষমতা বৃদ্ধিতে সহায়ক।",
+    description_en: "Naturally sweet mustard flower honey with a distinctive floral character.",
+    image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=900&q=85",
+    features: ["Floral taste", "Naturally sweet", "Versatile use", "Carefully packed"],
+    features_bn: ["প্রাকৃতিক ফুলের মিষ্টতা", "প্রাকৃতিকভাবে মিষ্টি", "বহুমুখী ব্যবহারোপযোগী", "সুরক্ষিত প্যাকেজিং"],
+    features_en: ["Floral taste", "Naturally sweet", "Versatile use", "Carefully packed"],
   },
   {
     id: 7,
@@ -316,32 +207,13 @@ export const products = [
     isNew: true,
     inStock: true,
     popularity: 92,
-    description:
-      "A premium honey selection inspired by the unique floral landscape of the Sundarbans.",
-    description_bn:
-      "সুন্দরবনের গহীন অরণ্যের প্রাকৃতিক মৌচাক থেকে সংগৃহীত খাঁটি বুনো মধু।",
-    description_en:
-      "A premium honey selection inspired by the unique floral landscape of the Sundarbans.",
-    image:
-      "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=900&q=85",
-    features: [
-      "Distinctive natural flavor",
-      "Premium selection",
-      "Versatile serving",
-      "Sealed packaging",
-    ],
-    features_bn: [
-      "অনন্য প্রাকৃতিক স্বাদ",
-      "প্রিমিয়াম কালেকশন",
-      "প্রতিদিনের সেবনে উপযোগী",
-      "নিরাপদ সিল করা বোতল",
-    ],
-    features_en: [
-      "Distinctive natural flavor",
-      "Premium selection",
-      "Versatile serving",
-      "Sealed packaging",
-    ],
+    description: "A premium honey selection inspired by the unique floral landscape of the Sundarbans.",
+    description_bn: "সুন্দরবনের গহীন অরণ্যের প্রাকৃতিক মৌচাক থেকে সংগৃহীত খাঁটি বুনো মধু।",
+    description_en: "A premium honey selection inspired by the unique floral landscape of the Sundarbans.",
+    image: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=900&q=85",
+    features: ["Distinctive natural flavor", "Premium selection", "Versatile serving", "Sealed packaging"],
+    features_bn: ["অনন্য প্রাকৃতিক স্বাদ", "প্রিমিয়াম কালেকশন", "প্রতিদিনের সেবনে উপযোগী", "নিরাপদ সিল করা বোতল"],
+    features_en: ["Distinctive natural flavor", "Premium selection", "Versatile serving", "Sealed packaging"],
   },
   {
     id: 8,
@@ -364,32 +236,13 @@ export const products = [
     isNew: false,
     inStock: true,
     popularity: 75,
-    description:
-      "A flavorful honey selection with a distinctive taste, perfect for everyday serving.",
-    description_bn:
-      "কালোজিরা ফুলের প্রাকৃতিক পরাগরেণু থেকে সংগৃহীত ঔষধি গুণসম্পন্ন পুষ্টিকর মধু।",
-    description_en:
-      "A flavorful honey selection with a distinctive taste, perfect for everyday serving.",
-    image:
-      "https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=900&q=85",
-    features: [
-      "Distinctive flavor",
-      "Naturally sweet",
-      "Everyday serving",
-      "Sealed packaging",
-    ],
-    features_bn: [
-      "অনন্য ঔষধি গুণ",
-      "প্রাকৃতিকভাবে মিষ্টি",
-      "দৈনন্দিন খাওয়ার জন্য সেরা",
-      "সিল করা বোতল",
-    ],
-    features_en: [
-      "Distinctive flavor",
-      "Naturally sweet",
-      "Everyday serving",
-      "Sealed packaging",
-    ],
+    description: "A flavorful honey selection with a distinctive taste, perfect for everyday serving.",
+    description_bn: "কালোজিরা ফুলের প্রাকৃতিক পরাগরেণু থেকে সংগৃহীত ঔষধি গুণসম্পন্ন পুষ্টিকর মধু।",
+    description_en: "A flavorful honey selection with a distinctive taste, perfect for everyday serving.",
+    image: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=900&q=85",
+    features: ["Distinctive flavor", "Naturally sweet", "Everyday serving", "Sealed packaging"],
+    features_bn: ["অনন্য ঔষধি গুণ", "প্রাকৃতিকভাবে মিষ্টি", "দৈনন্দিন খাওয়ার জন্য সেরা", "সিল করা বোতল"],
+    features_en: ["Distinctive flavor", "Naturally sweet", "Everyday serving", "Sealed packaging"],
   },
   {
     id: 9,
@@ -412,32 +265,13 @@ export const products = [
     isNew: false,
     inStock: true,
     popularity: 94,
-    description:
-      "Finely ground turmeric powder for vibrant color and authentic flavor in your cooking.",
-    description_bn:
-      "বাছাইকৃত খাঁটি কাঁচা হলুদ শুকিয়ে ভাঙানো উজ্জ্বল সোনালী রঙের বিশুদ্ধ হলুদ গুঁড়া।",
-    description_en:
-      "Finely ground turmeric powder for vibrant color and authentic flavor in your cooking.",
-    image:
-      "https://images.unsplash.com/photo-1615485500704-8e990f9900f4?w=900&q=85",
-    features: [
-      "Fine powder",
-      "Rich natural color",
-      "For everyday cooking",
-      "Sealed packaging",
-    ],
-    features_bn: [
-      "সূক্ষ্ম মসৃণ গুঁড়া",
-      "উজ্জ্বল প্রাকৃতিক রং",
-      "দৈনন্দিন রান্নার জন্য খাঁটি",
-      "বাতাসরোধী প্যাকেট",
-    ],
-    features_en: [
-      "Fine powder",
-      "Rich natural color",
-      "For everyday cooking",
-      "Sealed packaging",
-    ],
+    description: "Finely ground turmeric powder for vibrant color and authentic flavor in your cooking.",
+    description_bn: "বাছাইকৃত খাঁটি কাঁচা হলুদ শুকিয়ে ভাঙানো উজ্জ্বল সোনালী রঙের বিশুদ্ধ হলুদ গুঁড়া।",
+    description_en: "Finely ground turmeric powder for vibrant color and authentic flavor in your cooking.",
+    image: "https://images.unsplash.com/photo-1615485500704-8e990f9900f4?w=900&q=85",
+    features: ["Fine powder", "Rich natural color", "For everyday cooking", "Sealed packaging"],
+    features_bn: ["সূক্ষ্ম মসৃণ গুঁড়া", "উজ্জ্বল প্রাকৃতিক রং", "দৈনন্দিন রান্নার জন্য খাঁটি", "বাতাসরোধী প্যাকেট"],
+    features_en: ["Fine powder", "Rich natural color", "For everyday cooking", "Sealed packaging"],
   },
   {
     id: 10,
@@ -460,32 +294,13 @@ export const products = [
     isNew: true,
     inStock: true,
     popularity: 80,
-    description:
-      "A vibrant red chili powder that adds color and flavor to your favorite dishes.",
-    description_bn:
-      "উজ্জ্বল লাল রং এবং পরিমিত ঝালের বিশুদ্ধ শুকনো মরিচের গুঁড়া।",
-    description_en:
-      "A vibrant red chili powder that adds color and flavor to your favorite dishes.",
-    image:
-      "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=900&q=85",
-    features: [
-      "Rich red color",
-      "Fine texture",
-      "For traditional recipes",
-      "Fresh sealed packaging",
-    ],
-    features_bn: [
-      "উজ্জ্বল লাল বর্ণ",
-      "নিখুঁত টেক্সচার",
-      "ঐতিহ্যবাহী রান্নার স্বাদ",
-      "তাজা মোড়কজাত",
-    ],
-    features_en: [
-      "Rich red color",
-      "Fine texture",
-      "For traditional recipes",
-      "Fresh sealed packaging",
-    ],
+    description: "A vibrant red chili powder that adds color and flavor to your favorite dishes.",
+    description_bn: "উজ্জ্বল লাল রং এবং পরিমিত ঝালের বিশুদ্ধ শুকনো মরিচের গুঁড়া।",
+    description_en: "A vibrant red chili powder that adds color and flavor to your favorite dishes.",
+    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=900&q=85",
+    features: ["Rich red color", "Fine texture", "For traditional recipes", "Fresh sealed packaging"],
+    features_bn: ["উজ্জ্বল লাল বর্ণ", "নিখুঁত টেক্সচার", "ঐতিহ্যবাহী রান্নার স্বাদ", "তাজা মোড়কজাত"],
+    features_en: ["Rich red color", "Fine texture", "For traditional recipes", "Fresh sealed packaging"],
   },
   {
     id: 11,
@@ -508,32 +323,13 @@ export const products = [
     isNew: false,
     inStock: true,
     popularity: 84,
-    description:
-      "Aromatic ground cumin to bring authentic depth and flavor to everyday meals.",
-    description_bn:
-      "ঘরোয়া রান্নায় মন মাতানো সুবাস ও গভীর স্বাদ আনতে খাঁটি ভাজা জিরার গুঁড়া।",
-    description_en:
-      "Aromatic ground cumin to bring authentic depth and flavor to everyday meals.",
-    image:
-      "https://images.unsplash.com/photo-1599909533730-f9d7c2d4e7a5?w=900&q=85",
-    features: [
-      "Aromatic flavor",
-      "Finely ground",
-      "Ideal for curries",
-      "Sealed packaging",
-    ],
-    features_bn: [
-      "তীব্র সুবাস ও স্বাদ",
-      "মিহি করে গুঁড়ো করা",
-      "কারি ও তরকারির সেরা সঙ্গী",
-      "সিল করা প্যাকেট",
-    ],
-    features_en: [
-      "Aromatic flavor",
-      "Finely ground",
-      "Ideal for curries",
-      "Sealed packaging",
-    ],
+    description: "Aromatic ground cumin to bring authentic depth and flavor to everyday meals.",
+    description_bn: "ঘরোয়া রান্নায় মন মাতানো সুবাস ও গভীর স্বাদ আনতে খাঁটি ভাজা জিরার গুঁড়া।",
+    description_en: "Aromatic ground cumin to bring authentic depth and flavor to everyday meals.",
+    image: "https://images.unsplash.com/photo-1599909533730-f9d7c2d4e7a5?w=900&q=85",
+    features: ["Aromatic flavor", "Finely ground", "Ideal for curries", "Sealed packaging"],
+    features_bn: ["তীব্র সুবাস ও স্বাদ", "মিহি করে গুঁড়ো করা", "কারি ও তরকারির সেরা সঙ্গী", "সিল করা প্যাকেট"],
+    features_en: ["Aromatic flavor", "Finely ground", "Ideal for curries", "Sealed packaging"],
   },
   {
     id: 12,
@@ -556,32 +352,219 @@ export const products = [
     isNew: true,
     inStock: true,
     popularity: 89,
-    description:
-      "A convenient selection of essential spices for your everyday kitchen.",
-    description_bn:
-      "প্রতিদিনের রান্নার প্রয়োজনীয় খাঁটি হলুদ, মরিচ ও জিরার গুঁড়ার সাশ্রয়ী বিশেষ কম্বো প্যাক।",
-    description_en:
-      "A convenient selection of essential spices for your everyday kitchen.",
-    image:
-      "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=900&q=85",
-    features: [
-      "Multiple spice selections",
-      "Convenient combo",
-      "Everyday kitchen essential",
-      "Carefully packed",
-    ],
-    features_bn: [
-      "একাধিক মসলার সমাহার",
-      "সুবিধাজনক কম্বো প্যাক",
-      "রান্নাঘরের নিত্যসঙ্গী",
-      "নিরাপদ প্যাকেজিং",
-    ],
-    features_en: [
-      "Multiple spice selections",
-      "Convenient combo",
-      "Everyday kitchen essential",
-      "Carefully packed",
-    ],
+    description: "A convenient selection of essential spices for your everyday kitchen.",
+    description_bn: "প্রতিদিনের রান্নার প্রয়োজনীয় খাঁটি হলুদ, মরিচ ও জিরার গুঁড়ার সাশ্রয়ী বিশেষ কম্বো প্যাক।",
+    description_en: "A convenient selection of essential spices for your everyday kitchen.",
+    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=900&q=85",
+    features: ["Multiple spice selections", "Convenient combo", "Everyday kitchen essential", "Carefully packed"],
+    features_bn: ["একাধিক মসলার সমাহার", "সুবিধাজনক কম্বো প্যাক", "রান্নাঘরের নিত্যসঙ্গী", "নিরাপদ প্যাকেজিং"],
+    features_en: ["Multiple spice selections", "Convenient combo", "Everyday kitchen essential", "Carefully packed"],
+  },
+
+  // NEW PRODUCTS
+
+  {
+    id: 13,
+    slug: "khejur-gur",
+    name: "Date Palm Jaggery",
+    name_bn: "খেজুরের গুড়",
+    name_en: "Date Palm Jaggery",
+    category: "gur",
+    category_bn: "গুড়",
+    category_en: "Jaggery",
+    price: 0,
+    oldPrice: null,
+    rating: 0,
+    reviews: 0,
+    weight: "Not specified",
+    weight_bn: "নির্ধারিত নয়",
+    badge: "Coming Soon",
+    badge_bn: "শীঘ্রই আসছে",
+    badge_en: "Coming Soon",
+    isNew: true,
+    inStock: false,
+    popularity: 0,
+    description: "Date palm jaggery. Product details and price will be announced soon.",
+    description_bn: "খেজুরের গুড়। পণ্যের বিস্তারিত তথ্য ও মূল্য শীঘ্রই জানানো হবে।",
+    description_en: "Date palm jaggery. Product details and price will be announced soon.",
+    image: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=900&q=85",
+    features: ["Product details coming soon"],
+    features_bn: ["পণ্যের বিস্তারিত তথ্য শীঘ্রই জানানো হবে"],
+    features_en: ["Product details coming soon"],
+  },
+  {
+    id: 14,
+    slug: "akher-gur",
+    name: "Sugarcane Jaggery",
+    name_bn: "আখের গুড়",
+    name_en: "Sugarcane Jaggery",
+    category: "gur",
+    category_bn: "গুড়",
+    category_en: "Jaggery",
+    price: 0,
+    oldPrice: null,
+    rating: 0,
+    reviews: 0,
+    weight: "Not specified",
+    weight_bn: "নির্ধারিত নয়",
+    badge: "Coming Soon",
+    badge_bn: "শীঘ্রই আসছে",
+    badge_en: "Coming Soon",
+    isNew: true,
+    inStock: false,
+    popularity: 0,
+    description: "Sugarcane jaggery. Product details and price will be announced soon.",
+    description_bn: "আখের গুড়। পণ্যের বিস্তারিত তথ্য ও মূল্য শীঘ্রই জানানো হবে।",
+    description_en: "Sugarcane jaggery. Product details and price will be announced soon.",
+    image: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=900&q=85",
+    features: ["Product details coming soon"],
+    features_bn: ["পণ্যের বিস্তারিত তথ্য শীঘ্রই জানানো হবে"],
+    features_en: ["Product details coming soon"],
+  },
+  {
+    id: 15,
+    slug: "lal-ata",
+    name: "Red Wheat Flour",
+    name_bn: "লাল আটা",
+    name_en: "Red Wheat Flour",
+    category: "ata",
+    category_bn: "আটা",
+    category_en: "Flour",
+    price: 0,
+    oldPrice: null,
+    rating: 0,
+    reviews: 0,
+    weight: "Not specified",
+    weight_bn: "নির্ধারিত নয়",
+    badge: "Coming Soon",
+    badge_bn: "শীঘ্রই আসছে",
+    badge_en: "Coming Soon",
+    isNew: true,
+    inStock: false,
+    popularity: 0,
+    description: "Red wheat flour. Product details and price will be announced soon.",
+    description_bn: "লাল আটা। পণ্যের বিস্তারিত তথ্য ও মূল্য শীঘ্রই জানানো হবে।",
+    description_en: "Red wheat flour. Product details and price will be announced soon.",
+    image: "https://images.unsplash.com/photo-1627485937980-221c88ac04f9?w=900&q=85",
+    features: ["Product details coming soon"],
+    features_bn: ["পণ্যের বিস্তারিত তথ্য শীঘ্রই জানানো হবে"],
+    features_en: ["Product details coming soon"],
+  },
+  {
+    id: 16,
+    slug: "desi-musuri-dal",
+    name: "Desi Masoor Dal",
+    name_bn: "দেশি মসুর ডাল",
+    name_en: "Desi Masoor Dal",
+    category: "dal",
+    category_bn: "ডাল",
+    category_en: "Lentils",
+    price: 0,
+    oldPrice: null,
+    rating: 0,
+    reviews: 0,
+    weight: "Not specified",
+    weight_bn: "নির্ধারিত নয়",
+    badge: "Coming Soon",
+    badge_bn: "শীঘ্রই আসছে",
+    badge_en: "Coming Soon",
+    isNew: true,
+    inStock: false,
+    popularity: 0,
+    description: "Desi masoor dal. Product details and price will be announced soon.",
+    description_bn: "দেশি মসুর ডাল। পণ্যের বিস্তারিত তথ্য ও মূল্য শীঘ্রই জানানো হবে।",
+    description_en: "Desi masoor dal. Product details and price will be announced soon.",
+    image: "https://images.unsplash.com/photo-1515543904379-3d757pdfd?w=900&q=85",
+    features: ["Product details coming soon"],
+    features_bn: ["পণ্যের বিস্তারিত তথ্য শীঘ্রই জানানো হবে"],
+    features_en: ["Product details coming soon"],
+  },
+  {
+    id: 17,
+    slug: "maskolai-dal",
+    name: "Mashkalai Dal",
+    name_bn: "মাষকলাই ডাল",
+    name_en: "Mashkalai Dal",
+    category: "dal",
+    category_bn: "ডাল",
+    category_en: "Lentils",
+    price: 0,
+    oldPrice: null,
+    rating: 0,
+    reviews: 0,
+    weight: "Not specified",
+    weight_bn: "নির্ধারিত নয়",
+    badge: "Coming Soon",
+    badge_bn: "শীঘ্রই আসছে",
+    badge_en: "Coming Soon",
+    isNew: true,
+    inStock: false,
+    popularity: 0,
+    description: "Mashkalai dal. Product details and price will be announced soon.",
+    description_bn: "মাষকলাই ডাল। পণ্যের বিস্তারিত তথ্য ও মূল্য শীঘ্রই জানানো হবে।",
+    description_en: "Mashkalai dal. Product details and price will be announced soon.",
+    image: "https://images.unsplash.com/photo-1515543904379-3d757pdfd?w=900&q=85",
+    features: ["Product details coming soon"],
+    features_bn: ["পণ্যের বিস্তারিত তথ্য শীঘ্রই জানানো হবে"],
+    features_en: ["Product details coming soon"],
+  },
+  {
+    id: 18,
+    slug: "khesari-dal",
+    name: "Khesari Dal",
+    name_bn: "খেসারি ডাল",
+    name_en: "Khesari Dal",
+    category: "dal",
+    category_bn: "ডাল",
+    category_en: "Lentils",
+    price: 0,
+    oldPrice: null,
+    rating: 0,
+    reviews: 0,
+    weight: "Not specified",
+    weight_bn: "নির্ধারিত নয়",
+    badge: "Coming Soon",
+    badge_bn: "শীঘ্রই আসছে",
+    badge_en: "Coming Soon",
+    isNew: true,
+    inStock: false,
+    popularity: 0,
+    description: "Khesari dal. Product details and price will be announced soon.",
+    description_bn: "খেসারি ডাল। পণ্যের বিস্তারিত তথ্য ও মূল্য শীঘ্রই জানানো হবে।",
+    description_en: "Khesari dal. Product details and price will be announced soon.",
+    image: "https://images.unsplash.com/photo-1515543904379-3d757pdfd?w=900&q=85",
+    features: ["Product details coming soon"],
+    features_bn: ["পণ্যের বিস্তারিত তথ্য শীঘ্রই জানানো হবে"],
+    features_en: ["Product details coming soon"],
+  },
+  {
+    id: 19,
+    slug: "mugh-dal",
+    name: "Mung Dal",
+    name_bn: "মুগ ডাল",
+    name_en: "Mung Dal",
+    category: "dal",
+    category_bn: "ডাল",
+    category_en: "Lentils",
+    price: 0,
+    oldPrice: null,
+    rating: 0,
+    reviews: 0,
+    weight: "Not specified",
+    weight_bn: "নির্ধারিত নয়",
+    badge: "Coming Soon",
+    badge_bn: "শীঘ্রই আসছে",
+    badge_en: "Coming Soon",
+    isNew: true,
+    inStock: false,
+    popularity: 0,
+    description: "Mung dal. Product details and price will be announced soon.",
+    description_bn: "মুগ ডাল। পণ্যের বিস্তারিত তথ্য ও মূল্য শীঘ্রই জানানো হবে।",
+    description_en: "Mung dal. Product details and price will be announced soon.",
+    image: "https://images.unsplash.com/photo-1515543904379-3d757pdfd?w=900&q=85",
+    features: ["Product details coming soon"],
+    features_bn: ["পণ্যের বিস্তারিত তথ্য শীঘ্রই জানানো হবে"],
+    features_en: ["Product details coming soon"],
   },
 ];
 
@@ -590,57 +573,79 @@ export const getProductBySlug = (slug) =>
 
 export const getProductName = (product, lang = "bn") => {
   if (!product) return "";
+
   if (lang === "bn" && product.name_bn) return product.name_bn;
   if (lang === "en" && product.name_en) return product.name_en;
+
   if (typeof product.name === "object" && product.name !== null) {
     return product.name[lang] || product.name.en || product.name.bn || "";
   }
+
   return product.name || "";
 };
 
 export const getProductDescription = (product, lang = "bn") => {
   if (!product) return "";
+
   if (lang === "bn" && product.description_bn) return product.description_bn;
   if (lang === "en" && product.description_en) return product.description_en;
+
   if (typeof product.description === "object" && product.description !== null) {
-    return product.description[lang] || product.description.en || product.description.bn || "";
+    return (
+      product.description[lang] ||
+      product.description.en ||
+      product.description.bn ||
+      ""
+    );
   }
+
   return product.description || "";
 };
 
 export const getProductBadge = (product, lang = "bn") => {
   if (!product) return null;
+
   if (lang === "bn" && product.badge_bn !== undefined) return product.badge_bn;
   if (lang === "en" && product.badge_en !== undefined) return product.badge_en;
+
   if (typeof product.badge === "object" && product.badge !== null) {
     return product.badge[lang] || product.badge.en || product.badge.bn || null;
   }
+
   return product.badge || null;
 };
 
 export const getProductWeight = (product, lang = "bn") => {
   if (!product) return "";
+
   if (lang === "bn" && product.weight_bn) return product.weight_bn;
+
   return product.weight || "";
 };
 
 export const getProductCategory = (product, lang = "bn") => {
   if (!product) return "";
+
   if (lang === "bn" && product.category_bn) return product.category_bn;
   if (lang === "en" && product.category_en) return product.category_en;
+
   return product.category || "";
 };
 
 export const getProductFeatures = (product, lang = "bn") => {
   if (!product) return [];
+
   if (lang === "bn" && product.features_bn) return product.features_bn;
   if (lang === "en" && product.features_en) return product.features_en;
+
   return product.features || [];
 };
 
 export const getCategoryName = (category, lang = "bn") => {
   if (!category) return "";
+
   if (lang === "bn" && category.name_bn) return category.name_bn;
   if (lang === "en" && category.name_en) return category.name_en;
+
   return category.name || "";
 };
