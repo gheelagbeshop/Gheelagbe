@@ -1,451 +1,352 @@
-import img1 from "../assets/hero-spices.webp";
-import img2 from "../assets/img4.jpg";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import { Link } from "react-router-dom";
+import {
+  ArrowDownRight,
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Leaf,
+  PackageCheck,
+  PhoneCall,
+  ShoppingBag,
+  Truck,
+} from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
-const teamMembers = [
-  {
-    name: "Mark Henry",
-    role: "Owner",
-    image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600",
-  },
-  {
-    name: "Lucky Helen",
-    role: "Chef",
-    image: "https://images.unsplash.com/photo-1583394293214-28ded15ee548?w=600",
-  },
-  {
-    name: "Moon Henry",
-    role: "Founder",
-    image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600",
-  },
-  {
-    name: "Tom Monrow",
-    role: "Specialist",
-    image: "https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=600",
-  },
-];
-
-const testimonialsData = [
-  {
-    name: "Alamin Hasan",
-    role_en: "Food Specialist",
-    role_bn: "খাদ্য বিশেষজ্ঞ",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200",
-    rating: 5,
-    review_en:
-      "GheeLagbe offers the most authentic pure cow ghee I have tasted in years. The aroma and grainy texture remind me of home-churned village ghee.",
-    review_bn:
-      "ঘি লাগবে-র খাঁটি গাওয়া ঘি সত্যি অতুলনীয়। এর অসাধারণ সুবাস ও দানাদার টেক্সচার গ্রামের বাড়ির আসল ঘিয়ের কথা মনে করিয়ে দেয়।",
-  },
-  {
-    name: "John Smith",
-    role_en: "Regular Customer",
-    role_bn: "নিয়মিত গ্রাহক",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200",
-    rating: 5,
-    review_en:
-      "Amazing service and excellent quality. I really enjoyed the experience and would definitely recommend this business to everyone.",
-    review_bn:
-      "অসাধারণ সেবা এবং প্রিমিয়াম মান। সরিষার তেল ও মধুর স্বাদ শতভাগ খাঁটি। সবাইকে নিশ্চিন্তে কেনার পরামর্শ দেব।",
-  },
-  {
-    name: "Sarah Wilson",
-    role_en: "Happy Customer",
-    role_bn: "সন্তুষ্ট গ্রাহক",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200",
-    rating: 5,
-    review_en:
-      "Great experience, friendly service and wonderful quality. Everything was perfect and I look forward to ordering again.",
-    review_bn:
-      "দারুণ অভিজ্ঞতা, অত্যন্ত আন্তরিক কাস্টমার সার্ভিস এবং খাঁটি পণ্য। ডেলিভারিও খুব দ্রুত পেয়েছি।",
-  },
-  {
-    name: "David Miller",
-    role_en: "Food Lover",
-    role_bn: "খাদ্য রসিক",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200",
-    rating: 5,
-    review_en:
-      "A wonderful experience with great attention to detail. The service was excellent and the overall quality was impressive.",
-    review_bn:
-      "প্রতিটি পণ্যের প্যাকেজিং এবং সতেজতা প্রশংসনীয়। রান্নায় তাদের মসলার স্বাদ অনন্য মাত্রা যোগ করে।",
-  },
-];
+const photos = {
+  hero: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1800&q=90",
+  story: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=85",
+  ghee: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=900&q=85",
+  honey: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=900&q=85",
+  spices: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=900&q=85",
+  kitchen: "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1800&q=90",
+};
 
 const AboutUsPage = () => {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+  const bn = language === "bn";
 
-  const mapUrl =
-    "https://www.google.com/maps?q=Dhaka,Bangladesh&output=embed";
-
-  const features = [
-    {
-      icon: "♙",
-      title: t("about.whyChoose.feature1Title"),
-      description: t("about.whyChoose.feature1Desc"),
-    },
-    {
-      icon: "🚚",
-      title: t("about.whyChoose.feature2Title"),
-      description: t("about.whyChoose.feature2Desc"),
-    },
-    {
-      icon: "↻",
-      title: t("about.whyChoose.feature3Title"),
-      description: t("about.whyChoose.feature3Desc"),
-    },
-  ];
+  const copy = {
+    eyebrow: bn ? "ঘি লাগবে · আমাদের গল্প" : "GHEELAGBE · OUR STORY",
+    heroTitle: bn
+      ? "প্রকৃতির স্বাদ, প্রতিদিনের রান্নায়।"
+      : "A little closer to the goodness of nature.",
+    heroDescription: bn
+      ? "আপনার রান্নাঘরের পরিচিত প্রয়োজনীয় পণ্য—ঘি, সরিষার তেল, মধু ও মসলা—সহজে খুঁজে পেতে ঘি লাগবে।"
+      : "A thoughtful place to discover everyday kitchen essentials, from ghee and mustard oil to honey and spices.",
+    explore: bn ? "পণ্য দেখুন" : "Explore products",
+    storyLabel: bn ? "আমাদের পরিচয়" : "A NOTE ABOUT US",
+    storyTitle: bn
+      ? "ভালো খাবারের জন্য বেছে নেওয়া সহজ হওয়া উচিত।"
+      : "Good food choices should feel simple.",
+    storyP1: bn
+      ? "ঘি লাগবে তৈরি হয়েছে দৈনন্দিন রান্নার প্রয়োজনীয় খাবার ও উপকরণ এক জায়গায় সহজে পৌঁছে দেওয়ার ভাবনা থেকে।"
+      : "GheeLagbe is built around a simple idea: make it easier to find the food essentials that bring everyday meals together.",
+    storyP2: bn
+      ? "আমাদের সংগ্রহে রয়েছে ঘি, সরিষার তেল, মধু এবং বিভিন্ন মসলা। পণ্যের বিবরণ ও মূল্য পরিষ্কারভাবে তুলে ধরে কেনাকাটার অভিজ্ঞতাকে সহজ রাখাই আমাদের লক্ষ্য।"
+      : "Our collection brings together ghee, mustard oil, honey and spices. We aim to make browsing straightforward with clear product information and pricing.",
+    storyNote: bn ? "প্রতিদিনের রান্নার জন্য, এক জায়গায়।" : "Everyday kitchen essentials, in one place.",
+    collectionLabel: bn ? "আমাদের সংগ্রহ" : "THE COLLECTION",
+    collectionTitle: bn ? "রান্নাঘরের পরিচিত স্বাদ" : "Made for the everyday kitchen",
+    collectionDescription: bn
+      ? "আপনার পছন্দের পণ্য খুঁজে নিন আমাদের নির্বাচিত সংগ্রহ থেকে।"
+      : "Discover familiar ingredients and everyday favourites in our growing collection.",
+    products: [
+      {
+        title: bn ? "ঘি" : "Ghee",
+        subtitle: bn ? "সমৃদ্ধ স্বাদ" : "Rich, familiar flavour",
+        image: photos.ghee,
+      },
+      {
+        title: bn ? "মধু" : "Honey",
+        subtitle: bn ? "প্রাকৃতিক মিষ্টতা" : "A touch of sweetness",
+        image: photos.honey,
+      },
+      {
+        title: bn ? "মসলা" : "Spices",
+        subtitle: bn ? "রান্নায় সুবাস" : "Aromatic essentials",
+        image: photos.spices,
+      },
+    ],
+    valuesLabel: bn ? "আমাদের অঙ্গীকার" : "WHAT YOU CAN EXPECT",
+    valuesTitle: bn ? "স্বচ্ছতা, যত্ন এবং সহজ অভিজ্ঞতা।" : "Thoughtful details. A simpler experience.",
+    values: [
+      {
+        number: "01",
+        title: bn ? "স্পষ্ট পণ্যের তথ্য" : "Clear product details",
+        text: bn
+          ? "পণ্য সম্পর্কে জানুন এবং তথ্য দেখে নিজের পছন্দ তৈরি করুন।"
+          : "Explore product information and make choices with clarity.",
+      },
+      {
+        number: "02",
+        title: bn ? "সহজ অর্ডার" : "Easy ordering",
+        text: bn
+          ? "অ্যাকাউন্ট ছাড়াই সহজ checkout-এর মাধ্যমে অর্ডার করতে পারবেন।"
+          : "Place an order through a straightforward guest checkout.",
+      },
+      {
+        number: "03",
+        title: bn ? "ফোনে নিশ্চিতকরণ" : "Personal confirmation",
+        text: bn
+          ? "অর্ডার পাওয়ার পর আমাদের প্রতিনিধি ফোন করে তথ্য নিশ্চিত করবেন।"
+          : "After receiving your order, our team calls to confirm the details.",
+      },
+      {
+        number: "04",
+        title: bn ? "ক্যাশ অন ডেলিভারি" : "Cash on Delivery",
+        text: bn
+          ? "পণ্য হাতে পেয়ে মূল্য পরিশোধ করুন।"
+          : "Pay when your order is delivered to you.",
+      },
+    ],
+    processLabel: bn ? "যেভাবে কাজ করে" : "A SIMPLE PROCESS",
+    processTitle: bn ? "অর্ডার থেকে ডেলিভারি—সহজ কয়েকটি ধাপ।" : "From browsing to delivery, made simple.",
+    steps: [
+      {
+        icon: ShoppingBag,
+        title: bn ? "পণ্য বেছে নিন" : "Choose your products",
+        text: bn ? "আমাদের সংগ্রহ থেকে পছন্দের পণ্য যোগ করুন।" : "Find what you need and add it to your cart.",
+      },
+      {
+        icon: PackageCheck,
+        title: bn ? "অর্ডার সম্পন্ন করুন" : "Place your order",
+        text: bn ? "আপনার যোগাযোগ ও ডেলিভারির তথ্য দিন।" : "Enter your contact and delivery information.",
+      },
+      {
+        icon: PhoneCall,
+        title: bn ? "ফোনে নিশ্চিতকরণ" : "Confirm by phone",
+        text: bn ? "আমাদের প্রতিনিধি আপনার সঙ্গে যোগাযোগ করবেন।" : "Our representative will call to confirm your order.",
+      },
+      {
+        icon: Truck,
+        title: bn ? "ডেলিভারি গ্রহণ করুন" : "Receive your delivery",
+        text: bn ? "পণ্য বুঝে নিয়ে ক্যাশ অন ডেলিভারিতে মূল্য দিন।" : "Receive your items and pay on delivery.",
+      },
+    ],
+    delivery: bn ? "সারা বাংলাদেশে নির্দিষ্ট ডেলিভারি চার্জ ৳১২০" : "Flat delivery charge of ৳120 across Bangladesh",
+    ctaLabel: bn ? "আপনার রান্নাঘরের জন্য" : "FOR YOUR KITCHEN",
+    ctaTitle: bn ? "আজই খুঁজে নিন আপনার প্রয়োজনীয় পণ্য।" : "Find something good for your kitchen.",
+    ctaText: bn
+      ? "ঘি লাগবে-র সংগ্রহ ঘুরে দেখুন এবং আপনার পছন্দের পণ্য অর্ডার করুন।"
+      : "Explore the GheeLagbe collection and order the essentials you love.",
+    ctaButton: bn ? "কেনাকাটা শুরু করুন" : "Start shopping",
+  };
 
   return (
-    <div className="text-gray-800">
-      {/* Hero Section */}
-      <section
-        className="relative mb-25 flex h-[320px] items-center justify-center bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${img1})`,
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60"></div>
+    <main className="overflow-hidden bg-[#fbf8f0] text-[#20291f]">
+      {/* HERO */}
+      <section className="relative isolate min-h-[660px] overflow-hidden bg-[#e9eee5] lg:min-h-[720px]">
+        <div className="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(ellipse_at_12%_20%,rgba(255,255,255,.95),transparent_38%),radial-gradient(ellipse_at_85%_85%,rgba(114,139,102,.18),transparent_38%)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:url('data:image/svg+xml,%3Csvg viewBox=%270 0 180 180%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.9%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27 opacity=%27.22%27/%3E%3C/svg%3E')]" />
 
-        <div className="relative text-center text-white">
-          <h1 className="text-4xl font-bold">{t("about.hero.title")}</h1>
-          <p className="mt-2">
-            {t("about.hero.breadcrumb")}
-          </p>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="container-custom py-16">
-        <div className="flex flex-col items-center gap-18 lg:flex-row">
-          {/* Image Gallery */}
-          <div className="relative grid h-[740px] grid-cols-2 gap-12">
-            <div className="relative h-[536px] w-[336px]">
-              <img
-                className="absolute -top-15 left-0 rounded-sm object-cover"
-                src={img2}
-                alt="Healthy food"
-              />
-            </div>
-
-            <div className="grid gap-3">
-              <img
-                className="h-full w-full rounded-sm object-cover"
-                src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600"
-                alt="Fresh meal"
-              />
-
-              <img
-                className="h-[389px] w-[309px] rounded-sm object-cover"
-                src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600"
-                alt="Healthy salad"
-              />
-            </div>
-          </div>
-
-          {/* About Content */}
-          <div className="max-w-xl">
-            <p className="mb-2 text-xs italic text-green-700">
-              {t("about.section.tagline")}
+        <div className="relative mx-auto grid min-h-[660px] max-w-[1440px] items-center gap-12 px-5 py-16 sm:px-10 lg:min-h-[720px] lg:grid-cols-[.88fr_1.12fr] lg:gap-8 lg:px-16 lg:py-20">
+          <div className="relative z-10 max-w-[590px]">
+            <p className="mb-7 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.28em] text-[#59704f] sm:text-xs">
+              <span className="h-px w-9 bg-[#b18b48]" />
+              {copy.eyebrow}
             </p>
-
-            <h2 className="mb-4 text-[42px] font-bold leading-tight sm:text-[48px]">
-              {t("about.section.heading")}
-            </h2>
-
-            <p className="mb-6 text-sm leading-7 text-gray-500">
-              {t("about.section.description")}
+            <h1 className="max-w-[620px] font-heading text-[clamp(2.8rem,5.4vw,5.6rem)] leading-[1.12] tracking-[-.045em] text-[#20291f]">
+              {copy.heroTitle}
+            </h1>
+            <p className="mt-7 max-w-[470px] text-sm leading-8 text-[#626c5e] sm:text-base sm:leading-9">
+              {copy.heroDescription}
             </p>
-
-            <div className="flex items-center gap-4">
-              <a
-                href="/products"
-                className="rounded-[15px] bg-green-700 px-6 py-3 text-xs text-white transition hover:bg-green-800"
+            <div className="mt-9 flex flex-wrap items-center gap-6">
+              <Link
+                to="/products"
+                className="group inline-flex items-center gap-5 border-b border-[#254d32] pb-3 text-sm font-bold text-[#254d32] transition-colors hover:text-[#9a7435]"
               >
-                {t("about.section.knowMore")}
-              </a>
-
-              <a
-                href="#visit-shop"
-                className="flex items-center gap-2 text-sm text-green-800"
-              >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-green-700 text-white">
-                  ▶
-                </span>
-                {t("about.section.watchVideo")}
+                {copy.explore}
+                <ArrowUpRight size={18} className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+              </Link>
+              <a href="#our-story" className="text-xs font-semibold text-[#6d7569] transition-colors hover:text-[#254d32]">
+                {bn ? "আমাদের গল্প" : "Our story"} <span className="ml-1">↓</span>
               </a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="container-custom mx-auto max-w-6xl px-6 pb-40">
-        <div className="mb-8 text-center">
-          <h2 className="mb-2 text-3xl font-bold">
-            {t("about.whyChoose.title")}
-          </h2>
-          <p className="mx-auto max-w-xl text-sm text-gray-500">
-            {t("about.whyChoose.subtitle")}
-          </p>
-        </div>
-
-        {/* Food Banner */}
-        <img
-          src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1400"
-          alt="Delicious healthy food"
-          className="mb-10 h-64 w-full object-cover"
-        />
-
-        {/* Features */}
-        <div className="grid grid-cols-1 gap-10 text-center sm:grid-cols-3">
-          {features.map((feature, index) => (
-            <div key={index} className="px-4">
-              <div className="mb-4 text-4xl text-gray-500">{feature.icon}</div>
-
-              <h3 className="mb-2 text-lg font-semibold">{feature.title}</h3>
-
-              <p className="text-xs leading-6 text-gray-500">
-                {feature.description}
-              </p>
+            <div className="mt-16 hidden items-center gap-4 text-[10px] font-semibold uppercase tracking-[.2em] text-[#788273] lg:flex">
+              <span>01</span><span className="h-px w-14 bg-[#aeb8a7]" /><span>{bn ? "খাঁটি স্বাদের খোঁজে" : "A taste of the familiar"}</span>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="relative pb-10">
-        <section className="container-custom mx-auto max-w-6xl px-6 pb-10">
-          {/* ================= TEAM SECTION ================= */}
-
-          {/* Green Background */}
-          <div className="absolute -top-15 left-0 h-[360px] w-full bg-[#396C03]" />
-
-          {/* Team Heading */}
-          <div className="relative px-4 pt-12 text-center text-white">
-            <h2 className="text-[42px] font-bold sm:text-[48px]">
-              {t("about.team.title")}
-            </h2>
-
-            <p className="mx-auto mt-2 max-w-md text-xs text-white/80">
-              {t("about.team.subtitle")}
-            </p>
           </div>
 
-          {/* Team Slider */}
-          <div className="relative mx-auto mt-8 max-w-6xl px-5">
-            <Swiper
-              modules={[Autoplay, Pagination]}
-              spaceBetween={18}
-              slidesPerView={1}
-              loop={true}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-              }}
-              pagination={{ clickable: true }}
-              breakpoints={{
-                480: { slidesPerView: 2 },
-                768: { slidesPerView: 3 },
-                1024: { slidesPerView: 4 },
-              }}
-              className="teamSwiper !pb-12"
-            >
-              {teamMembers.map((member, index) => (
-                <SwiperSlide key={index}>
-                  <div className="group overflow-hidden bg-white shadow-lg">
-                    {/* Member Image */}
-                    <div className="relative h-52 overflow-hidden">
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-
-                      {/* Social Links */}
-                      <div className="absolute right-2 top-3 flex translate-x-3 flex-col gap-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-                        <a
-                          href="#"
-                          className="flex h-8 w-8 items-center justify-center rounded-sm bg-white text-gray-700 hover:bg-green-700 hover:text-white"
-                        >
-                          f
-                        </a>
-
-                        <a
-                          href="#"
-                          className="flex h-8 w-8 items-center justify-center rounded-sm bg-white text-gray-700 hover:bg-green-700 hover:text-white"
-                        >
-                          ◎
-                        </a>
-
-                        <a
-                          href="#"
-                          className="flex h-8 w-8 items-center justify-center rounded-sm bg-white text-gray-700 hover:bg-green-700 hover:text-white"
-                        >
-                          in
-                        </a>
-                      </div>
-                    </div>
-
-                    {/* Member Details */}
-                    <div className="py-4 text-center">
-                      <h3 className="text-sm font-semibold text-gray-800">
-                        {member.name}
-                      </h3>
-
-                      <p className="mt-1 text-xs text-gray-400">
-                        {member.role}
-                      </p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </section>
-
-        {/* ================= TESTIMONIAL SECTION ================= */}
-
-        <section className="mx-auto max-w-6xl px-5 py-10">
-          {/* Heading */}
-          <div className="mb-12">
-            <p className="font-serif text-sm italic text-green-700">
-              {t("about.testimonials.tagline")}
-            </p>
-
-            <h2 className="mt-2 text-3xl font-bold text-gray-800">
-              {t("about.testimonials.heading")}
-            </h2>
-          </div>
-
-          {/* Testimonial Slider */}
-          <div className="mx-auto max-w-3xl">
-            <Swiper
-              modules={[Autoplay, Pagination]}
-              slidesPerView={1}
-              loop={true}
-              autoplay={{
-                delay: 4000,
-                disableOnInteraction: false,
-              }}
-              pagination={{ clickable: true }}
-              className="testimonialSwiper !pb-12"
-            >
-              {testimonialsData.map((item, index) => {
-                const role = language === "bn" ? item.role_bn : item.role_en;
-                const review =
-                  language === "bn" ? item.review_bn : item.review_en;
-
-                return (
-                  <SwiperSlide key={index}>
-                    <div className="relative mb-3 mt-8 bg-white px-6 pb-10 pt-16 text-center shadow-xl shadow-gray-100/80 sm:px-12">
-                      {/* Customer Image */}
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="absolute -top-7 left-1/2 h-16 w-16 -translate-x-1/2 rounded-full border-4 border-white object-cover shadow-md"
-                      />
-
-                      {/* Quote Symbol */}
-                      <div className="mb-4 font-serif text-4xl text-green-700">
-                        ❞
-                      </div>
-
-                      {/* Review */}
-                      <p className="mx-auto max-w-xl text-sm leading-7 text-gray-500">
-                        {review}
-                      </p>
-
-                      {/* Star Rating */}
-                      <div className="mt-5 flex justify-center gap-1 text-xl">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <span
-                            key={star}
-                            className={
-                              star <= item.rating
-                                ? "text-green-700"
-                                : "text-gray-300"
-                            }
-                          >
-                            ★
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Customer Name */}
-                      <h3 className="mt-3 font-bold text-gray-800">
-                        {item.name}
-                      </h3>
-
-                      <p className="mt-1 text-xs text-gray-400">{role}</p>
-                    </div>
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-          </div>
-        </section>
-
-        {/* Visit Our Shop */}
-        <section id="visit-shop" className="w-full bg-white px-5 py-16">
-          <div className="mx-auto max-w-6xl">
-            {/* Section Heading */}
-            <div className="mb-10 text-center">
-              <p className="mb-2 font-serif text-sm italic text-green-700">
-                {t("about.visitShop.tagline")}
-              </p>
-
-              <h2 className="text-3xl font-bold text-gray-800 md:text-4xl">
-                {t("about.visitShop.title")}
-              </h2>
-
-              <p className="mx-auto mt-3 max-w-xl text-sm text-gray-500">
-                {t("about.visitShop.description")}
-              </p>
-            </div>
-
-            {/* Google Maps iframe */}
-            <div className="h-[350px] w-full overflow-hidden rounded-xl border border-gray-200 shadow-lg md:h-[450px]">
-              <iframe
-                src={mapUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={t("about.visitShop.title")}
+          <div className="relative mx-auto w-full max-w-[760px] lg:ml-auto">
+            <div className="absolute -right-10 -top-12 h-[78%] w-[72%] border border-[#254d32]/15" />
+            <div className="relative h-[390px] overflow-hidden sm:h-[520px] lg:h-[590px]">
+              <img
+                src={photos.hero}
+                alt={bn ? "তাজা খাবার ও রান্নার উপকরণ" : "Fresh food and kitchen ingredients"}
+                className="h-full w-full object-cover object-center"
+                fetchPriority="high"
               />
-            </div>
-
-            {/* Bottom Location Info */}
-            <div className="mt-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
-              <div>
-                <h3 className="font-semibold text-gray-800">
-                  {t("about.visitShop.locationTitle")}
-                </h3>
-
-                <p className="mt-1 text-sm text-gray-500">
-                  {t("about.visitShop.locationSubtitle")}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#142519]/45 via-transparent to-[#142519]/5" />
+              <div className="absolute bottom-7 left-7 max-w-xs text-white sm:bottom-10 sm:left-10">
+                <span className="text-[10px] font-semibold uppercase tracking-[.25em] text-white/75">GHEELAGBE</span>
+                <p className="mt-3 font-heading text-2xl leading-tight sm:text-3xl">
+                  {bn ? "প্রতিদিনের খাবারে, পরিচিত স্বাদ।" : "Familiar flavours for everyday moments."}
                 </p>
               </div>
+            </div>
+            <div className="absolute -bottom-5 -left-3 h-24 w-24 border-b border-l border-[#b18b48] sm:-left-7 sm:h-32 sm:w-32" />
+          </div>
+        </div>
+      </section>
 
-              <a
-                href="https://www.google.com/maps?q=Dhaka,Bangladesh"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full bg-green-700 px-6 py-3 text-sm font-medium text-white transition hover:bg-green-800"
-              >
-                {t("about.visitShop.getDirections")}
-              </a>
+      {/* STORY */}
+      <section id="our-story" className="relative px-5 py-24 sm:px-10 lg:px-16 lg:py-32">
+        <div className="pointer-events-none absolute right-0 top-0 h-[520px] w-[520px] rounded-full bg-[#dce6d8]/35 blur-[110px]" />
+        <div className="relative mx-auto grid max-w-[1240px] items-center gap-14 lg:grid-cols-[1fr_.9fr] lg:gap-24">
+          <div className="relative">
+            <div className="absolute -left-5 -top-5 h-full w-full border border-[#c8d1c1]" />
+            <img
+              src={photos.story}
+              alt={bn ? "টেবিলে সাজানো তাজা খাবার" : "Freshly prepared food on a table"}
+              className="relative h-[360px] w-full object-cover sm:h-[520px]"
+              loading="lazy"
+            />
+            <div className="absolute -bottom-7 right-0 bg-[#254d32] px-6 py-5 text-[#f9f6ec] sm:right-[-24px] sm:px-8">
+              <Leaf size={19} className="mb-3 text-[#d9a441]" />
+              <p className="max-w-[190px] text-xs leading-6">{copy.storyNote}</p>
             </div>
           </div>
-        </section>
+
+          <div className="pt-3 lg:pt-0">
+            <p className="mb-6 text-[10px] font-bold uppercase tracking-[.28em] text-[#a17b3c]">{copy.storyLabel}</p>
+            <h2 className="max-w-[560px] font-heading text-3xl leading-[1.2] tracking-[-.03em] sm:text-4xl lg:text-[3.35rem]">
+              {copy.storyTitle}
+            </h2>
+            <div className="mt-8 max-w-[540px] space-y-5 text-sm leading-8 text-[#687064] sm:text-base sm:leading-9">
+              <p>{copy.storyP1}</p>
+              <p>{copy.storyP2}</p>
+            </div>
+            <div className="mt-9 flex items-center gap-4 border-t border-[#d9ded3] pt-6">
+              <span className="h-px w-10 bg-[#b18b48]" />
+              <span className="text-[10px] font-bold uppercase tracking-[.2em] text-[#65745d]">GHEELAGBE</span>
+            </div>
+          </div>
+        </div>
       </section>
-    </div>
+
+      {/* PRODUCT EDITORIAL */}
+      <section className="relative bg-[#f0f0e8] px-5 py-24 sm:px-10 lg:px-16 lg:py-28">
+        <div className="pointer-events-none absolute inset-0 opacity-60 [background:radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,.9),transparent_55%)]" />
+        <div className="relative mx-auto max-w-[1240px]">
+          <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div>
+              <p className="mb-5 text-[10px] font-bold uppercase tracking-[.28em] text-[#a17b3c]">{copy.collectionLabel}</p>
+              <h2 className="font-heading text-3xl tracking-[-.03em] sm:text-5xl">{copy.collectionTitle}</h2>
+            </div>
+            <p className="max-w-sm text-sm leading-7 text-[#70776b]">{copy.collectionDescription}</p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {copy.products.map((product, index) => (
+              <Link
+                to="/products"
+                key={product.title}
+                className={`group relative block overflow-hidden bg-[#dfe5da] ${index === 1 ? "md:mt-12" : ""}`}
+              >
+                <div className="aspect-[4/5] overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.045]"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#142519]/75 via-transparent to-transparent opacity-90" />
+                <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between p-6 text-white sm:p-8">
+                  <div>
+                    <p className="mb-2 text-[10px] uppercase tracking-[.2em] text-white/70">{product.subtitle}</p>
+                    <h3 className="font-heading text-3xl">{product.title}</h3>
+                  </div>
+                  <span className="mb-1 flex h-10 w-10 items-center justify-center border border-white/60 transition-colors group-hover:bg-white group-hover:text-[#254d32]">
+                    <ArrowUpRight size={18} />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* VALUES */}
+      <section className="relative overflow-hidden bg-[#1d3828] px-5 py-24 text-[#f8f5eb] sm:px-10 lg:px-16 lg:py-28">
+        <div className="pointer-events-none absolute -right-40 -top-48 h-[600px] w-[600px] rounded-full border border-white/[.07]" />
+        <div className="pointer-events-none absolute -right-16 -top-24 h-[420px] w-[420px] rounded-full border border-white/[.06]" />
+        <div className="relative mx-auto max-w-[1240px]">
+          <div className="max-w-2xl">
+            <p className="mb-5 text-[10px] font-bold uppercase tracking-[.28em] text-[#d9b66e]">{copy.valuesLabel}</p>
+            <h2 className="font-heading text-3xl leading-tight tracking-[-.03em] sm:text-5xl">{copy.valuesTitle}</h2>
+          </div>
+
+          <div className="mt-16 grid border-t border-white/20 sm:grid-cols-2 lg:grid-cols-4">
+            {copy.values.map((item) => (
+              <article key={item.number} className="border-b border-white/20 py-8 sm:px-6 sm:first:pl-0 lg:border-b-0 lg:border-r lg:px-7 lg:first:pl-0 lg:last:border-r-0">
+                <p className="mb-10 text-xs tracking-[.2em] text-[#d9b66e]">{item.number}</p>
+                <h3 className="text-base font-semibold">{item.title}</h3>
+                <p className="mt-4 text-sm leading-7 text-white/60">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="relative px-5 py-24 sm:px-10 lg:px-16 lg:py-28">
+        <div className="mx-auto max-w-[1240px]">
+          <div className="mb-14 max-w-2xl">
+            <p className="mb-5 text-[10px] font-bold uppercase tracking-[.28em] text-[#a17b3c]">{copy.processLabel}</p>
+            <h2 className="font-heading text-3xl leading-tight tracking-[-.03em] sm:text-5xl">{copy.processTitle}</h2>
+          </div>
+
+          <div className="grid border-t border-[#d8ded3] sm:grid-cols-2 lg:grid-cols-4">
+            {copy.steps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <article key={step.title} className="group border-b border-[#d8ded3] py-8 sm:px-6 sm:first:pl-0 lg:border-b-0 lg:border-r lg:px-7 lg:first:pl-0 lg:last:border-r-0">
+                  <div className="mb-8 flex items-center justify-between">
+                    <span className="font-heading text-4xl text-[#c4cbbd]">0{index + 1}</span>
+                    <Icon size={21} strokeWidth={1.4} className="text-[#58704f] transition-transform group-hover:-translate-y-1" />
+                  </div>
+                  <h3 className="text-base font-bold">{step.title}</h3>
+                  <p className="mt-3 max-w-[240px] text-sm leading-7 text-[#737b70]">{step.text}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-center gap-3 border border-[#d8ded3] bg-[#f1f2eb] px-5 py-4 text-xs font-semibold text-[#35523a]">
+            <Truck size={17} />
+            {copy.delivery}
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL IMAGE CTA */}
+      <section className="relative min-h-[500px] overflow-hidden sm:min-h-[580px]">
+        <img
+          src={photos.kitchen}
+          alt={bn ? "প্রাকৃতিক আলোয় সাজানো রান্নাঘর" : "A warmly lit home kitchen"}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[#142519]/65" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#142519]/75 via-[#142519]/35 to-transparent" />
+        <div className="relative mx-auto flex min-h-[500px] max-w-[1240px] items-center px-5 py-20 sm:min-h-[580px] sm:px-10 lg:px-16">
+          <div className="max-w-2xl text-white">
+            <p className="mb-6 text-[10px] font-bold uppercase tracking-[.28em] text-[#e2c17d]">{copy.ctaLabel}</p>
+            <h2 className="font-heading text-4xl leading-[1.12] tracking-[-.035em] sm:text-6xl">{copy.ctaTitle}</h2>
+            <p className="mt-6 max-w-lg text-sm leading-8 text-white/75 sm:text-base">{copy.ctaText}</p>
+            <Link
+              to="/products"
+              className="group mt-9 inline-flex items-center gap-5 border-b border-[#e2c17d] pb-3 text-sm font-bold text-white transition-colors hover:text-[#e2c17d]"
+            >
+              {copy.ctaButton}
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 };
 
