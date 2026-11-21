@@ -4,7 +4,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  Leaf,
   PackageCheck,
   PhoneCall,
   ShoppingBag,
@@ -18,15 +17,16 @@ import {
   getProductCategory,
   getProductWeight,
   getCategoryName,
+  productPhotos,
 } from "../data/products";
 import { addToCart } from "../utils/cart";
 import { useLanguage } from "../context/LanguageContext";
 
 const images = {
-  ghee: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1000&q=85",
-  oil: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1000&q=85",
-  honey: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=1000&q=85",
-  spices: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1000&q=85",
+  ghee: productPhotos.butter,
+  oil: "https://images.pexels.com/photos/8922289/pexels-photo-8922289.jpeg?auto=compress&dpr=1&h=750&w=1260",
+  honey: "https://images.pexels.com/photos/23940105/pexels-photo-23940105/free-photo-of-stick-of-honey-on-a-yellow-background.jpeg?dpr=1&h=750&w=1260",
+  spices: productPhotos.turmeric,
   editorial: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=2000&q=90",
 };
 

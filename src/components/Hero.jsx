@@ -10,28 +10,26 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import { productPhotos } from "../data/products";
 
 const slideImages = [
   {
     id: 1,
-    image:
-      "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=1000&q=90",
+    image: productPhotos.butter,
     alt: "Rich creamy butter product photography",
     number: "01",
     link: "/products",
   },
   {
     id: 2,
-    image:
-      "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=1000&q=90",
+    image: productPhotos.turmeric,
     alt: "A collection of colourful natural spices",
     number: "02",
     link: "/products",
   },
   {
     id: 3,
-    image:
-      "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=1000&q=90",
+    image: productPhotos.mustardOil,
     alt: "Golden cooking oil in a glass bottle",
     number: "03",
     link: "/products",

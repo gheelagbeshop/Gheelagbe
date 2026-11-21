@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   Search,
   SlidersHorizontal,
@@ -19,7 +19,6 @@ import {
   products,
   categories,
   getProductName,
-  getProductDescription,
   getProductBadge,
   getProductCategory,
   getProductWeight,
@@ -316,10 +315,24 @@ function FilterContent({
 
 export default function Products() {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { t, language } = useLanguage();
 
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const categoryParam = searchParams.get("category");
+  const selectedCategory =
+    categories.some((category) => category.id === categoryParam) &&
+    products.some((product) => product.category === categoryParam)
+      ? categoryParam
+      : "all";
+  const setSelectedCategory = (categoryId) => {
+    setSearchParams((previous) => {
+      const next = new URLSearchParams(previous);
+      if (categoryId === "all") next.delete("category");
+      else next.set("category", categoryId);
+      return next;
+    }, { replace: true });
+  };
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(MAX_PRICE);
   const [rating, setRating] = useState(0);
