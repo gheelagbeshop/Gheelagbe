@@ -13,6 +13,7 @@ import CheckoutPage from "./Pages/CheckoutPage";
 import OrderSuccessPage from "./Pages/OrderSuccessPage";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ export default function App() {
   return (
     <LanguageProvider>
       <RouterProvider router={router} />
+      <WhatsAppButton />
       <Analytics />
       <SpeedInsights />
     </LanguageProvider>
