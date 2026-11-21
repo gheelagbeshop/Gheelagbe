@@ -12,6 +12,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import SEO from "../components/SEO";
 
 export default function ContactUs() {
   const { t } = useLanguage();
@@ -76,6 +77,11 @@ export default function ContactUs() {
 
   return (
     <main className="bg-[#FFF9EE] text-[#242820]">
+      <SEO
+        title="যোগাযোগ করুন | GheeLagbe"
+        description="GheeLagbe-এর পণ্য, অর্ডার ও ডেলিভারি সম্পর্কে জানতে আমাদের সঙ্গে যোগাযোগ করুন।"
+        canonical="https://gheelagbe.com/contact"
+      />
       {/* HERO */}
       <section className="relative overflow-hidden px-5 py-20 sm:px-8 lg:px-16 lg:py-28">
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">

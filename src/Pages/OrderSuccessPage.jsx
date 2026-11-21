@@ -7,6 +7,7 @@ import {
   Truck,
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import SEO from "../components/SEO";
 import { getProductName } from "../data/products";
 
 const formatPrice = (price) =>
@@ -40,6 +41,11 @@ const OrderSuccessPage = () => {
 
   return (
     <div className="min-h-screen bg-[#FFF9EE] px-4 py-12">
+      <SEO
+        title="অর্ডার সফল | GheeLagbe"
+        description="আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে।"
+        noindex
+      />
       <div className="mx-auto max-w-2xl">
         <div className="rounded-3xl border border-[#E8E4D9] bg-white p-6 text-center shadow-sm sm:p-10">
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E8F0E8] text-[#254D32]">

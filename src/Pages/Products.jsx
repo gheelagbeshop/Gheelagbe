@@ -27,6 +27,7 @@ import {
 } from "../data/products";
 import { addToCart } from "../utils/cart";
 import { useLanguage } from "../context/LanguageContext";
+import SEO from "../components/SEO";
 
 const MAX_PRICE = Math.max(...products.map((p) => p.price));
 
@@ -460,6 +461,11 @@ export default function Products() {
 
   return (
     <main className="min-h-screen bg-[#FFF9EE] text-[#242820]">
+      <SEO
+        title="সকল পণ্য | GheeLagbe"
+        description="GheeLagbe-এ খুঁজে নিন খাঁটি ঘি, সরিষার তেল, প্রাকৃতিক গুড় এবং অন্যান্য মানসম্মত খাদ্যসামগ্রী।"
+        canonical="https://gheelagbe.com/products"
+      />
       {/* PAGE HERO */}
       <section className="relative isolate overflow-hidden bg-[#E8F0E8]">
         {/* Background decoration */}
