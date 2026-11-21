@@ -11,9 +11,11 @@ import CartPage from "./Pages/CartPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import CheckoutPage from "./Pages/CheckoutPage";
 import OrderSuccessPage from "./Pages/OrderSuccessPage";
+import { Analytics } from "@vercel/analytics/react";
 
 const router = createBrowserRouter([
   {
+    
     path: "/",
     element: <Root />,
     children: [
@@ -35,6 +37,7 @@ export default function App() {
   return (
     <LanguageProvider>
       <RouterProvider router={router} />
+      <Analytics />
     </LanguageProvider>
   );
 }
