@@ -11,9 +11,11 @@ import CartPage from "./Pages/CartPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import CheckoutPage from "./Pages/CheckoutPage";
 import OrderSuccessPage from "./Pages/OrderSuccessPage";
+import FAQPage from "./Pages/FAQPage";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import WhatsAppButton from "./components/WhatsAppButton";
+import BackToTopButton from "./components/BackToTopButton";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,7 @@ const router = createBrowserRouter([
       { path: "checkout", element: <CheckoutPage /> },
       { path: "order-success", element: <OrderSuccessPage /> },
       { path: "contact", element: <ContactUs /> },
+      { path: "faq", element: <FAQPage /> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },
@@ -40,6 +43,7 @@ export default function App() {
     <LanguageProvider>
       <RouterProvider router={router} />
       <WhatsAppButton />
+      <BackToTopButton />
       <Analytics />
       <SpeedInsights />
     </LanguageProvider>

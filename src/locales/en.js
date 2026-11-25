@@ -449,7 +449,74 @@ export const en = {
     footerNote: "Goodness in Every Home.",
   },
 
+  faqPage: {
+    eyebrow: "HELP & INFORMATION",
+    title: "General Questions",
+    description: "Answers to common questions about shopping with GheeLagbe.",
+    contactPrompt: "Need more help? Our team is happy to assist.",
+    contactLink: "Contact us",
+    items: [
+      {
+        question: "How do I place an order?",
+        answer: "Choose products and add them to your cart. Continue to checkout, enter your contact and delivery details, then submit your order. You do not need an account.",
+      },
+      {
+        question: "Which payment methods can I use?",
+        answer: "Cash on Delivery is available. Pay the order total when your delivery arrives.",
+      },
+      {
+        question: "How much is delivery?",
+        answer: "The delivery charge is ৳120 for both Inside Dhaka and Outside Dhaka orders.",
+      },
+      {
+        question: "Will you call me after I order?",
+        answer: "Yes. A team representative will call the phone number you provide to confirm your order and delivery details.",
+      },
+      {
+        question: "Can I track my order online?",
+        answer: "There is no online tracking page at the moment. Our team will contact you by phone to confirm your order and coordinate delivery.",
+      },
+      {
+        question: "Are there coupon codes?",
+        answer: "The checkout currently accepts the demo codes GHEE10 and SAVE100. GHEE10 takes 10% off up to ৳200, and SAVE100 takes ৳100 off the subtotal.",
+      },
+      {
+        question: "How can I change or cancel an order?",
+        answer: "Please contact our team as soon as possible at +880 1644-945406. We will check whether the order can still be updated or cancelled.",
+      },
+    ],
+  },
+
   footer: {
+    reference: {
+      shop: "SHOP",
+      products: "All Products",
+      ghee: "Ghee",
+      oil: "Mustard Oil",
+      honey: "Honey",
+      spices: "Spices",
+      jaggery: "Jaggery",
+      flour: "Flour",
+      lentils: "Lentils",
+      explore: "EXPLORE",
+      home: "Home",
+      ourStory: "Our Story",
+      whatIsNoni: "What is Noni?",
+      storeLocator: "Store Locator",
+      faqs: "General Questions",
+      contact: "Contact",
+      connect: "CONNECT",
+      join: "JOIN OUR OHANA",
+      emailPlaceholder: "Enter your email address",
+      emailAria: "Email address",
+      subscribeAria: "Subscribe",
+      signupUnavailable: "Email signup is not connected yet.",
+      madeBy: "Made by Nice People",
+      copyright: "© Copyright {year} {brand}.",
+      privacy: "Privacy Policy",
+      terms: "Terms & Conditions",
+      tagline: "PURELY NATURAL",
+    },
     logoTagline: "Purely Natural",
     description:
       "Bringing nature closer to your life with our fresh and natural products.",

@@ -11,7 +11,7 @@ const WhatsAppButton = () => {
 
   return (
     <motion.div
-      className="fixed bottom-5 right-5 z-[9999] sm:bottom-6 sm:right-6"
+      className="fixed bottom-[84px] right-5 z-[9999] sm:bottom-[104px] sm:right-6"
       animate={
         shouldReduceMotion
           ? {}

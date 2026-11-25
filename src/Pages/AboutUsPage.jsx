@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import {
-  ArrowDownRight,
   ArrowRight,
   ArrowUpRight,
-  Check,
   Leaf,
   PackageCheck,
   PhoneCall,
@@ -12,13 +10,14 @@ import {
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import SEO from "../components/SEO";
+import { productPhotos } from "../data/products";
 
 const photos = {
   hero: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1800&q=90",
   story: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=85",
-  ghee: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=900&q=85",
-  honey: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=900&q=85",
-  spices: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=900&q=85",
+  ghee: productPhotos.butter,
+  honey: productPhotos.honeyJar,
+  spices: productPhotos.turmeric,
   kitchen: "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1800&q=90",
 };
 

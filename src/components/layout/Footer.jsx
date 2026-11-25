@@ -1,10 +1,19 @@
 
 import { Link } from "react-router-dom";
+import { ArrowRight, Mail } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext";
 import { ArrowUp, ArrowUpRight } from "lucide-react";
 
-const Footer = () => {
-  const { t } = useLanguage();
+const shopLinks = [
+  { key: "products", to: "/products" },
+  { key: "ghee", to: "/products?category=ghee" },
+  { key: "oil", to: "/products?category=oil" },
+  { key: "honey", to: "/products?category=honey" },
+  { key: "spices", to: "/products?category=spices" },
+  { key: "jaggery", to: "/products?category=gur" },
+  { key: "flour", to: "/products?category=ata" },
+  { key: "lentils", to: "/products?category=dal" },
+];
 
   const developers = [
     {
@@ -288,6 +297,6 @@ const Footer = () => {
 
     </footer>
   );
-};
+}
 
 export default Footer;
